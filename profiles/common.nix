@@ -5,6 +5,8 @@
 
   documentation.dev.enable = true;
 
+  boot.cleanTmpDir = lib.mkDefault true;
+
   #-- tty & locale --------------------
   i18n = {
     consoleFont = "Lat2-Terminus16";

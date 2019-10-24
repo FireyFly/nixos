@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  boot.cleanTmpDir = true;
-
   #-- networking ----------------------
   networking.networkmanager.enable = true;
 
@@ -36,9 +34,10 @@
   # };
     libinput = {
       enable = true;
-      # TODO: further touchpad settings
       accelSpeed = "0.6";
       disableWhileTyping = true;
+      tappingDragLock = false;
+      # see xinput --list-props 11; encode 'libinput Accel Speed' -> 'Option "AccelSpeed"'
       additionalOptions = ''
         Option "TappingButtonMap" "lmr"
       '';
@@ -52,6 +51,8 @@
   services.logind.lidSwitch = "ignore";
   services.illum.enable = true;
   powerManagement.powertop.enable = true;
+
+  # TODO: look into enabling TLP?
 
   #-- programs ------------------------
   programs.ssh.startAgent = true;
