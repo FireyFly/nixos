@@ -3,4 +3,5 @@
   ./profiles/common.nix
   ./profiles/laptop.nix
   ./user.nix
+  ./xserver.nix
 ]

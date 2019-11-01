@@ -14,17 +14,22 @@ in {
       isNormalUser = true;
       uid = 1000;
       shell = pkgs.zsh;
-      extraGroups = [
-        "wheel"
-        "audio"
-        "video"
-        "networkmanager"
-        "dialout"
-        "wireshark"
-        "vboxusers"
-      ];
       # TODO: openssh.authorizedKeys.keys
     };
+
+    users.users.firefly.extraGroups = [
+      "wheel"
+      "audio"
+      "video"
+      "networkmanager"
+      "dialout"
+      "wireshark"
+      "vboxusers"
+    ];
+
+    users.users.firefly.packages = with pkgs; [
+      up
+    ];
 
     mine.users.users.firefly = {
       environment = {
