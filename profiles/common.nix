@@ -1,9 +1,23 @@
 { config, pkgs, lib, ... }:
 
-{
+let
+  myModules = import ../modules/module-list.nix;
+
+  docsModule = {
+    documentation.dev.enable = true;
+    environment.systemPackages = [ pkgs.manpages ];
+  };
+
+in {
+  imports = myModules ++ [
+    docsModule
+  ];
+
   # TODO: nix, nixpkgs configuration
 
-  documentation.dev.enable = true;
+  nixpkgs.overlays = [
+    (import ../packages/overlay.nix)
+  ];
 
   boot.cleanTmpDir = lib.mkDefault true;
 
@@ -45,6 +59,12 @@
       "vboxusers"
     ];
     # TODO: openssh.authorizedKeys.keys
+  };
+  mine.users.users.firefly = {
+    environment = {
+    # MANPATH = "$HOME/.nix-profile/share/man:/";
+      EDITOR = "vim";
+    };
   };
 
   # TODO: environment.extraInit (XDG_CONFIG_DIR?)
