@@ -8,11 +8,11 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../profiles/common.nix
-    ../../profiles/laptop.nix
-  ];
+  ] ++ (import ../../modules/module-list.nix);
 
   networking.hostName = "as";
+
+  mine.profiles.laptop.enable = true;
 
   #-- boot & hw -----------------------
   boot = {
