@@ -46,6 +46,8 @@ in {
     # window manager
     services.xserver.windowManager.herbstluftwm.enable = true;
 
+    environment.systemPackages = with pkgs; [ scrot xclip ];
+
     # fonts
     fonts = {
       enableDefaultFonts = true;

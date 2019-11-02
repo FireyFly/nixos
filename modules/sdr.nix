@@ -12,5 +12,6 @@ in {
     boot.blacklistedKernelModules = [ "dvb_usb_rtl28xxu" ];
   # environment.systemPackages = [ pkgs.rtl-sdr ];
     services.udev.packages = [ pkgs.rtl-sdr ];
+    environment.systemPackages = [ pkgs.gqrx ];
   };
 }

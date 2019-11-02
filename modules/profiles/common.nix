@@ -48,9 +48,20 @@ in {
     #-- programs ------------------------
     programs.zsh.enable = true;
     environment.systemPackages = with pkgs; [
-      w3m wget
+      # standard tools
+      bc file htop psmisc tree
+      # network
+      bind finger_bsd lftp mtr whois
+      mosh wget
+      # compression
+      p7zip unrar unzip zip
+      # reveng etc
+      hexd pixd colordiff vbindiff
+      # useful tools
+      w3m jq ripgrep xmlformat
+      mandoc
+      j
     ];
-  # environment.systemPackages = [ pkgs.manpages ];
 
     #-- users ---------------------------
     mine.enableUser = true;
