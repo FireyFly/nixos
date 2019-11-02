@@ -3,13 +3,14 @@
 
 { config, pkgs, ... }:
 
-{
+let
+  hardwareConfigPath = ./hardware-configuration.nix;
+  myModuleList = import ../../modules/module-list.nix;
+
+in {
   nixpkgs.config.allowUnfreePredicate = (x: pkgs.lib.hasPrefix "ttf-envy-code-r" x.name);
 
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ] ++ (import ../../modules/module-list.nix);
+  imports = [ hardwareConfigPath ] ++ myModuleList;
 
   networking.hostName = "kaun";
 
@@ -27,6 +28,8 @@
     options iwlwifi 11n_disable=1
     options iwlwifi swcrypto=1
   '';
+
+  hardware.cpu.intel.updateMicrocode = true;
 
   #-- services etc --------------------------------------------------
   # Enable PCSC-Lite (SmartCard r/w)

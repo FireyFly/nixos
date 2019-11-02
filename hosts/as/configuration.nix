@@ -2,13 +2,14 @@
 # See nixos-help, configuration.nix(5)
 { config, pkgs, ... }:
 
-{
+let
+  hardwareConfigPath = ./hardware-configuration.nix;
+  myModuleList = import ../../modules/module-list.nix;
+
+in {
   nixpkgs.config.allowUnfree = true;
 
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ] ++ (import ../../modules/module-list.nix);
+  imports = [ hardwareConfigPath ] ++ myModuleList;
 
   networking.hostName = "as";
 
@@ -28,6 +29,8 @@
   swapDevices = [
     { label = "swap"; }
   ];
+
+  hardware.cpu.intel.updateMicrocode = true;
 
   #-- system packages -----------------------------------------------
   environment.systemPackages = with pkgs; [
