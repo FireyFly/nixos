@@ -3,6 +3,9 @@
 let
   cfg = config.mine.profiles.common;
 
+  filterNonNull = builtins.filter (x: x != null);
+  ifX11 = x: if config.services.xserver.enable then x else null;
+
 in {
   options = {
     mine.enableUser = lib.mkEnableOption "firefly user";
@@ -27,8 +30,10 @@ in {
       "vboxusers"
     ];
 
-    users.users.firefly.packages = with pkgs; [
+    users.users.firefly.packages = with pkgs; filterNonNull [
+      plaintext
       up
+      (ifX11 scrup)
     ];
 
     mine.users.users.firefly = {
