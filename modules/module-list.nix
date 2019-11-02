@@ -4,4 +4,5 @@
   ./profiles/laptop.nix
   ./user.nix
   ./xserver.nix
+  ./sdr.nix
 ]

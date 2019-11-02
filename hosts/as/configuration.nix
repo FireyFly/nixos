@@ -14,6 +14,7 @@ in {
   networking.hostName = "as";
 
   mine.profiles.laptop.enable = true;
+  mine.enableSDR = true;
 
   #-- boot & hw -----------------------
   boot = {
@@ -22,8 +23,6 @@ in {
 
     initrd.supportedFilesystems = [ "ext4" ];
     supportedFilesystems = [ "ext4" ];
-
-    blacklistedKernelModules = [ "dvb_usb_rtl28xxu" ];
   };
 
   swapDevices = [
@@ -34,11 +33,6 @@ in {
 
   #-- system packages -----------------------------------------------
   environment.systemPackages = with pkgs; [
-    manpages # TODO: unnecessary?
-    # shell
-    zsh # TODO: unnecessary?
-    # kernel modules
-    rtl-sdr
     # for KDE applications
     kdeFrameworks.kxmlgui
     # for WoW
