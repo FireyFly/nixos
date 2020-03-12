@@ -2,8 +2,21 @@
 
 let
   cfg = config.services.xserver;
+  cfgMine = config.mine.services.xserver;
 
 in {
+  options = {
+    mine.services.xserver.emitMediaKeyEvents = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = ''
+        Whether to emit key events for media keys (volup, voldown, mute) by
+        listening to corresponding ACPI events and injecting keypress events.
+        On some laptops this appears to be necessary in order to map them.
+      '';
+    };
+  };
+
   config = lib.mkIf cfg.enable {
 
     # use DRI whenever possible
@@ -42,6 +55,27 @@ in {
         Option "TappingButtonMap" "lmr"
       '';
     };
+
+    # forward media key events if desired
+    services.acpid = let
+      xdotool = "${pkgs.xdotool}/bin/xdotool";
+    in if cfgMine.emitMediaKeyEvents then {
+      enable = true;
+      handlers = {
+        volumeup = {
+          event = "button/volumeup.*";
+          action = "${xdotool} key XF86AudioRaiseVolume";
+        };
+        volumedown = {
+          event = "button/volumedown.*";
+          action = "${xdotool} key XF86AudioLowerVolume";
+        };
+        mute = {
+          event = "button/mute.*";
+          action = "${xdotool} key XF86AudioMute";
+        };
+      };
+    } else {};
 
     # window manager
     services.xserver.windowManager.herbstluftwm.enable = true;
