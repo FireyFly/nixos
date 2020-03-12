@@ -29,13 +29,13 @@ in {
     boot.cleanTmpDir = lib.mkDefault true;
 
     #-- tty & locale --------------------
-    i18n = {
-      consoleFont = "Lat2-Terminus16";
+    console = {
+      font = "Lat2-Terminus16";
       # TODO: ./path/to/dvorak-sv-firefly.map.gz
-      consoleKeyMap = "dvorak-sv-a1";
-      defaultLocale = "en_GB.UTF-8";
+      keyMap = "dvorak-sv-a1";
     };
 
+    i18n.defaultLocale = "en_GB.UTF-8";
     time.timeZone = "Europe/Stockholm";
 
     #-- services ------------------------

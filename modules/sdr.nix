@@ -16,10 +16,6 @@ in {
       multimon-ng
       inspectrum
       sox
-    # gnuradio
-    # gnuradio-gsm
-    # gnuradio-osmosdr
-    # gnuradio-rds
     ];
   };
 }

@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
 
 let
-  cfg = config.mine.profiles.common;
-
   filterNonNull = builtins.filter (x: x != null);
   ifX11 = x: if config.services.xserver.enable then x else null;
 

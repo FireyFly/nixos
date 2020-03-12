@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  cfg = config.mine.profiles.common;
+  cfg = config.mine.profiles.laptop;
 
 in {
   options = {
