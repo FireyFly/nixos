@@ -34,6 +34,7 @@ in {
       plaintext
       up
       (ifX11 scrup)
+      (ifX11 katarakt)
     ];
 
     mine.users.users.firefly = {
