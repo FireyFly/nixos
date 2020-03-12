@@ -14,12 +14,17 @@ in {
     hardware = {
       pulseaudio.enable = true;
       pulseaudio.support32Bit = true;
+      pulseaudio.package = pkgs.pulseaudioFull; # needed for bluetooth headphones
       bluetooth.enable = true;
     };
 
     services.xserver = {
       enable = true;
       libinput.enable = true;
+    };
+
+    services.pcscd = {
+      enable = true;
     };
 
     # TODO: services.mpd
