@@ -86,7 +86,14 @@ in {
     fonts = {
       enableDefaultFonts = true;
       enableFontDir = true;
-      fonts = with pkgs; [ ttf-envy-code-r noto-fonts-emoji ];
+      fonts = with pkgs; [
+        ttf-envy-code-r
+        noto-fonts
+        noto-fonts-cjk
+        noto-fonts-extra
+        noto-fonts-emoji
+        unifont
+      ];
       fontconfig.enable = true;
       fontconfig.defaultFonts = {
         monospace = [ "Envy Code R" "DejaVu Sans Mono" "Noto Color Emoji" ];
