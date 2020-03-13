@@ -1,15 +1,15 @@
 { config, lib, utils, pkgs, ... }:
 
-with lib;
-
 let
+  inherit (lib) mapAttrsToList toList isList concatStringsSep mkOption types;
+
   cfg = config.mine.users;
 
   # adapted from nixos shells-environment.nix
   exportStringOf = vars:
     let
       exportStringOfOne = n: v: ''export ${n}="${concatStringsSep ":" v}"'';
-      exportVariables = mapAttrsToList exportStringOfOne (mapAttrs (n: toList) vars);
+      exportVariables = mapAttrsToList exportStringOfOne (lib.mapAttrs (n: toList) vars);
     in
       concatStringsSep "\n" exportVariables;
 
@@ -20,7 +20,7 @@ let
         # adapted from nixos shells-environment.nix
         default = {};
         type = with types; attrsOf (either str (listOf str));
-        apply = mapAttrs (n: v: if isList v then concatStringsSep ":" v else v);
+        apply = lib.mapAttrs (n: v: if isList v then concatStringsSep ":" v else v);
         example = { EDITOR = "nvim"; };
         description = ''
           A set of user-specific environment variables to be bound during
@@ -56,14 +56,14 @@ in {
   config = {
     environment.etc =
       # adapted from nixos users-groups.nix
-      (mapAttrs' (name: { environment, ... }: {
+      (lib.mapAttrs' (name: { environment, ... }: {
         name = "environments/per-user/${name}";
         value.text = ''
         # DO NOT EDIT -- this file has been generated automatically.
 
         ${exportStringOf environment}
         '';
-      }) (filterAttrs (_: u: u.environment != {}) cfg.users));
+      }) (lib.filterAttrs (_: u: u.environment != {}) cfg.users));
 
     environment.extraInit = ''
     # setup user-specific environment variables
