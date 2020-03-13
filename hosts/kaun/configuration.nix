@@ -1,6 +1,5 @@
 # NixOS system configuration
 # See nixos-help, configuration.nix(5)
-
 { config, pkgs, ... }:
 
 let
@@ -15,6 +14,8 @@ in {
   networking.hostName = "kaun";
 
   mine.profiles.laptop.enable = true;
+  mine.services.xserver.emitMediaKeyEvents = true;
+  mine.enableSDR = true;
 
   #-- boot & hw -----------------------
   boot.loader.grub = {
@@ -35,23 +36,6 @@ in {
   # Enable PCSC-Lite (SmartCard r/w)
 # services.pcscd.enable = true;
 # services.pcscd.plugins = [ pkgs.ccid ];
-
-  # TODO: doesn't work, because `hardware.pulseaudio.systemWide = false`
-# services.acpid = {
-#   enable = true;
-#   handlers.volumeup = {
-#     event = "button/volumeup.*";
-#     action = "${pkgs.ponymix}/bin/ponymix increase -d 0 2";
-#   };
-#   handlers.volumedown = {
-#     event = "button/volumedown.*";
-#     action = "${pkgs.ponymix}/bin/ponymix increase -d 0 2";
-#   };
-#   handlers.mute = {
-#     event = "button/mute.*";
-#     action = "${pkgs.ponymix}/bin/ponymix toggle -d 0";
-#   };
-# };
 
   # Fomu USB rules
   services.udev.extraRules = ''
