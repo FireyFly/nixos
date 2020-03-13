@@ -47,6 +47,7 @@ in {
 
     #-- programs ------------------------
     programs.zsh.enable = true;
+    programs.ssh.askPassword = "";
     environment.systemPackages = with pkgs; [
       # standard tools
       bc file htop psmisc tree
