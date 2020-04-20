@@ -50,6 +50,7 @@ in {
     programs.ssh.askPassword = "";
     programs.mtr.enable = true;
     environment.systemPackages = with pkgs; [
+      manpages
       # standard tools
       bc file htop psmisc tree
       # network
