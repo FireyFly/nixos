@@ -15,7 +15,6 @@ in {
       isNormalUser = true;
       uid = 1000;
       shell = pkgs.zsh;
-      # TODO: openssh.authorizedKeys.keys
     };
 
     users.users.firefly.extraGroups = [

@@ -48,11 +48,12 @@ in {
     #-- programs ------------------------
     programs.zsh.enable = true;
     programs.ssh.askPassword = "";
+    programs.mtr.enable = true;
     environment.systemPackages = with pkgs; [
       # standard tools
       bc file htop psmisc tree
       # network
-      bind finger_bsd lftp mtr whois
+      bind finger_bsd lftp whois
       mosh wget
       # compression
       p7zip unrar unzip zip
@@ -60,8 +61,11 @@ in {
       hexd pixd colordiff vbindiff
       # useful tools
       w3m jq ripgrep xmlformat
-      mandoc
+      #mandoc
       j
+      # etc
+      vim_configurable
+      git
     ];
 
     #-- users ---------------------------
