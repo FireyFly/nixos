@@ -32,6 +32,7 @@ in {
       up
       (ifX11 scrup)
       (ifX11 katarakt)
+      (ifX11 pangoterm)
     ];
 
     mine.users.users.firefly = {

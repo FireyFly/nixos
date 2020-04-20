@@ -8,6 +8,7 @@ self: super:
 
   # Other packages
   katarakt = self.libsForQt5.callPackage ./katarakt {};
+  pangoterm = self.callPackage ./pangoterm {};
 
   # Fixes
   inspectrum = self.libsForQt5.callPackage ./inspectrum {};
