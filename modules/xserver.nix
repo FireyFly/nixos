@@ -23,6 +23,7 @@ in {
     hardware = {
       opengl.driSupport = true;
       opengl.driSupport32Bit = true;
+      opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
     };
 
     # keyboard
