@@ -6,7 +6,7 @@
   ./profiles/laptop.nix
   # shared system config
   ./user.nix
-  ./xserver.nix
+  ./xserver
   ./sdr.nix
   # per-software config files
   ./herbstluftwm

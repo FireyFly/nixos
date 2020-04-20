@@ -1,0 +1,335 @@
+// FireFly's custom keyboard variants.
+// based on a keyboard map from an 'xkb/symbols/se' file
+
+default partial alphanumeric_keys xkb_symbols "basic" {
+  include "firefly(firefly)"
+};
+
+partial alphanumeric_keys xkb_symbols "test" {
+  include "se(basic)"
+  name[Group1]="FireFly - Test";
+};
+
+// ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┲━━━━━━━━━┓
+// │     │ !   │ "   │ #   │ ¤   │ %   │ &   │ /   │ ( ≤ │ ) ≥ │ = ° │ ?   │ è ¬ ┃         ┃
+// │     │ 1 ¡ │ 2 @ │ 3 £ │ 4 $ │ 5   │ 6   │ 7 { │ 8 [ │ 9 ] │ 0 } │ + \ │ é ± ┃   BS    ┃
+// ┢━━━━━┷━┱───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┴─┬───┺━┳━━━━━━━┫
+// ┃       ┃   ∀ │   ∃ │   ∈ │   ⊆ │     │   ★ │   ∞ │   ⊥ │   ⊤ │   → │ ; ę │ ê ^ ┃       ┃
+// ┃ Tab   ┃ å ∧ │ ä ∨ │ ö ∩ │ p ∪ │ y   │ f ⋆ │ g ∘ │ c 7 │ r 8 │ l → │ , √ │ ë ~ ┃       ┃
+// ┣━━━━━━━┻┱────┴┬────┴┬────┴┬────┴┬────┴┬────┴┬────┴┬────┴┬────┴┬────┴┬────┴┬────┺┓  CR  ┃
+// ┃ (Esc)  ┃   Æ │   Ø │   ≈ │     │   ≅ │   Ð │   ← │   Þ │     │     │ _ ē │ * × ┃      ┃
+// ┃ Ctrl_L ┃ a æ │ o ø │ e ≠ │ u   │ i ≡ │ d ð │ h ← │ t þ │ n   │ s ſ │ - ẹ │ ' ` ┃      ┃
+// ┣━━━━━━┳━┹───┬─┴───┬─┴───┬─┴───┬─┴───┬─┴───┬─┴───┬─┴───┬─┴───┬─┴───┬─┴───┲━┷━━━━━┻━━━━━━┫
+// ┃      ┃ > ¦ │ : ė │   ⌈ │   ↓ │   ↑ │     │     │     │     │     │     ┃              ┃
+// ┃ Shift┃ < | │ . · │ q ⌊ │ j ↓ │ k ↑ │ x   │ b   │ m   │ w   │ v   │ z   ┃              ┃
+// ┣━━━━━━╋━━━━━┷━┳━━━┷━━━┱─┴─────┴─────┴─────┴─────┴─────┴───┲━┷━━━━━╈━━━━━┻━┳━━━━━━━┳━━━━┛
+// ┃      ┃       ┃       ┃                                   ┃       ┃       ┃       ┃
+// ┃      ┃ Mod4  ┃  Alt  ┃               Space               ┃ AltGr ┃ Greek ┃Compose┃
+// ┗━━━━━━┻━━━━━━━┻━━━━━━━┹───────────────────────────────────┺━━━━━━━┻━━━━━━━┻━━━━━━━┛
+//
+//      ┌─────┐  1: regular,           è é  These refer to the corresponding
+//      │ 2 4 │  2: shifted,           ê ë  dead modifier key that was used to
+//      │ 1 3 │  3: altgr,             ē ė  produce each character.
+//      └─────┘  4: shift+altgr        ẹ ę
+
+
+//-- Full layout ----------------------------------------------------
+partial alphanumeric_keys xkb_symbols "firefly" {
+  include "se(basic)" // For special symbols etc
+//include "us(dvorak-intl)"
+
+  // Layout is described by multiple orthogonal included layouts
+  include "firefly(svorak-a1-base)"
+  include "firefly(firefly-altgr-mixin)"
+
+  name[Group1]="FireFly - Svorak";
+  key.type[Group1]="FOUR_LEVEL";
+
+  // Remap modifier keys
+//replace key <LCTL>  { [ VoidSymbol ] }; // TODO: this is necessary--why?
+//replace key <LCTL>  { [ Hyper_L ] };
+//replace key <CAPS>  { [ Control_L, Control_L ] };
+  replace key <CAPS> {
+    type[Group1] = "ONE_LEVEL",
+    symbols[Group1] = [ Control_L ],
+    actions[Group1] = [ SetMods(modifiers=Control) ]
+  };
+  replace key <RCTL>  { type="ONE_LEVEL", [ Multi_key ] };
+  replace key <SPCE>  { type="FOUR_LEVEL", [ space, space, _, nobreakspace ] };
+  replace key <MENU>  { type="ONE_LEVEL", [ dead_greek ] };
+};
+
+// Qwerty layout (but retains other modifications)
+partial alphanumeric_keys xkb_symbols "qwerty" {
+  include "firefly(firefly)"
+  include "se"
+};
+
+// Minecraft-modified layout (use @ in place of ä to enable WASD)
+partial alphanumeric_keys xkb_symbols "minecraft" {
+  include "firefly(firefly)"
+  key <AD01> { [      aring,       Aring, _, _ ] };
+  key <AD02> { [         at,  Adiaeresis, _, _ ] };
+  key <AD03> { [ odiaeresis,  Odiaeresis, _, _ ] };
+  key <AD11> { [      comma,   semicolon, _, _ ] };
+  key <AB01> { [     period,       colon, _, _ ] };
+};
+
+// Cave Story-modified layout (put xz on qwerty positions)
+partial alphanumeric_keys xkb_symbols "cavestory" {
+  include "firefly(firefly)"
+  key <AB01> { [ x, X, period, colon ] };
+  key <AB02> { [ z, Z, q, Q ] };
+};
+
+
+//-- Alphanumeric ---------------------------------------------------
+// Base US dvorak letter layout
+partial alphanumeric_keys xkb_symbols "dvorak-base" {
+  key <AD01> { [ apostrophe,    quotedbl, _, _ ] };
+  key <AD02> { [      comma,        less, _, _ ] };
+  key <AD03> { [     period,     greater, _, _ ] };
+  key <AD04> { [          p,           P, _, _ ] };
+  key <AD05> { [          y,           Y, _, _ ] };
+  key <AD06> { [          f,           F, _, _ ] };
+  key <AD07> { [          g,           G, f, F ] }; // fuck
+  key <AD08> { [          c,           C, _, _ ] };
+  key <AD09> { [          r,           R, _, _ ] };
+  key <AD10> { [          l,           L, _, _ ] };
+  key <AD11> { [      slash,    question, _, _ ] };
+
+  key <AC01> { [          a,           A, _, _ ] };
+  key <AC02> { [          o,           O, _, _ ] };
+  key <AC03> { [          e,           E, _, _ ] };
+  key <AC04> { [          u,           U, _, _ ] };
+  key <AC05> { [          i,           I, _, _ ] };
+  key <AC06> { [          d,           D, _, _ ] };
+  key <AC07> { [          h,           H, _, _ ] };
+  key <AC08> { [          t,           T, _, _ ] };
+  key <AC09> { [          n,           N, _, _ ] };
+  key <AC10> { [          s,           S, _, _ ] };
+  key <AC11> { [      minus,  underscore, _, _ ] };
+
+  key <AB01> { [      colon,   semicolon, _, _ ] };
+  key <AB02> { [          q,           Q, _, _ ] };
+  key <AB03> { [          j,           J, _, _ ] };
+  key <AB04> { [          k,           K, _, _ ] };
+  key <AB05> { [          x,           X, _, _ ] };
+  key <AB06> { [          b,           B, _, _ ] };
+  key <AB07> { [          m,           M, _, _ ] };
+  key <AB08> { [          w,           W, _, _ ] };
+  key <AB09> { [          v,           V, _, _ ] };
+  key <AB10> { [          z,           Z, _, _ ] };
+};
+
+// Base Svorak A1
+hidden partial alphanumeric_keys xkb_symbols "svorak-a1-base" {
+  include "firefly(dvorak-base)"
+
+  key <AD01> { [      aring,       Aring, _, _ ] };
+  key <AD02> { [ adiaeresis,  Adiaeresis, _, _ ] };
+  key <AD03> { [ odiaeresis,  Odiaeresis, _, _ ] };
+  key <AD11> { [      comma,   semicolon, _, _ ] };
+  key <AB01> { [     period,       colon, _, _ ] };
+};
+
+// Base sv-Dvorak
+hidden partial alphanumeric_keys xkb_symbols "svdvorak-base" {
+  replace key <AC01> { [ a, A,      aring,       Aring ] };
+  replace key <AC02> { [ o, O, adiaeresis,  Adiaeresis ] };
+  replace key <AC03> { [ e, E, odiaeresis,  Odiaeresis ] };
+};
+
+
+//-- Symbols --------------------------------------------------------
+// Custom third- and fourth-level characters
+hidden partial alphanumeric_keys xkb_symbols "firefly-altgr-mixin" {
+  key <AE01> { [ _, _,            _,            _ ] };
+  key <AE02> { [ _, _,            _,            _ ] };
+  key <AE03> { [ _, _,            _,            _ ] };
+  key <AE04> { [ _, _,            _,            _ ] };
+  key <AE05> { [ _, _,            _,            _ ] };
+  key <AE06> { [ _, _,            _,            _ ] };
+  key <AE07> { [ _, _,            _,            _ ] };
+  key <AE08> { [ _, _,            _, lessthanequal ] }; //   ≤
+  key <AE09> { [ _, _,            _, greaterthanequal ] }; //   ≥
+  key <AE10> { [ _, _,            _,            _ ] };
+  key <AE11> { [ _, _,            _,            _ ] };
+  key <AE12> { [ _, _,            _,            _ ] };
+
+  key <AD01> { [ _, _,   logicaland,        U2200 ] }; // ∧ ∀
+  key <AD02> { [ _, _,    logicalor,        U2203 ] }; // ∨ ∃
+  key <AD03> { [ _, _, intersection,    elementof ] }; // ∩ ∈
+  key <AD04> { [ _, _,        union,        U2286 ] }; // ∪ ⊆
+//key <AD05> { [ _, _,           at,           at ] };
+//key <AD06> { [ _, _,           at,           at ] };
+//key <AD07> { [ _, _,          jot,     infinity ] }; // ∘ ∞
+  key <AD08> { [ _, _,     downtack,       uptack ] }; // ⊤ ⊥
+  key <AD09> { [ _, _,    righttack,     lefttack ] }; // ⊢ ⊣
+  key <AD10> { [ _, _,        Right,   rightarrow ] }; //   →
+  key <AD11> { [ _, _,      radical,  dead_ogonek ] }; // √ ę
+  key <AD12> { [ _, _,   asciitilde,  asciicircum ] }; // ~ ^
+
+  key <AC01> { [ _, _,           ae,           AE ] }; // æ Æ
+  key <AC02> { [ _, _,       oslash,       Oslash ] }; // ø Ø
+  key <AC03> { [ _, _,     approxeq,     notequal ] }; // ≈ ≠
+  key <AC04> { [ _, _,           at,           at ] };
+  key <AC05> { [ _, _,    identical,        U2245 ] }; // ≡ ≅
+  key <AC06> { [ _, _,          eth,          ETH ] }; // ð Ð
+  key <AC07> { [ _, _,         Left,    leftarrow ] }; //   ←
+  key <AC08> { [ _, _,        thorn,        THORN ] }; // þ Þ
+  key <AC09> { [ _, _,        U22C6,        U2605 ] }; // ⋆ ★
+  key <AC10> { [ _, _,        U017F,           at ] }; //
+  key <AC11> { [ _, _, dead_belowdot, dead_macron ] }; // ẹ ē
+  key <BKSL> { [ _, _,         grave,    multiply ] }; // ` ×
+
+  key <AB01> { [ _, _, periodcentered, dead_abovedot ] }; // · ė
+  key <AB02> { [ _, _,        U230A,        U2308 ] }; // ⌊ ⌈
+  key <AB03> { [ _, _,         Down,    downarrow ] }; //   ↓
+  key <AB04> { [ _, _,           Up,      uparrow ] }; //   ↑
+  key <AB05> { [ _, _,           at,           at ] };
+  key <AB06> { [ _, _,           at,           at ] };
+  key <AB07> { [ _, _,           mu,           at ] }; // µ
+  key <AB08> { [ _, _,           at,           at ] };
+  key <AB09> { [ _, _,           at,           at ] };
+  key <AB10> { [ _, _,           at,           at ] };
+};
+
+
+//-- Combined -------------------------------------------------------
+// This one is around for "legacy" reasons--libxkbcommon has issues with the
+// combined one.  Need to look into. (TODO)
+// (Expected to be outdated...)
+hidden partial alphanumeric_keys xkb_symbols "combined" {
+  key <AD01> { [      aring,       Aring, logicaland,      U2200 ] };
+  key <AD02> { [ adiaeresis,  Adiaeresis,  logicalor,      U2203 ] };
+  key <AD03> { [ odiaeresis,  Odiaeresis, intersection, elementof ] };
+  key <AD04> { [          p,           P,      union,      U2286 ] };
+  key <AD05> { [          y,           Y,         at,         at ] };
+  key <AD06> { [          f,           F,      U22C6,      U2605 ] };
+  key <AD07> { [          g,           G,        jot,   infinity ] };
+  key <AD08> { [          c,           C,   downtack,     uptack ] };
+  key <AD09> { [          r,           R,  righttack,   lefttack ] };
+  key <AD10> { [          l,           L,      Right, rightarrow ] };
+  key <AD11> { [      comma,   semicolon,    radical, dead_ogonek ] };
+  key <AD12> { [ dead_diaeresis, dead_circumflex, asciitilde,  asciicircum ] }; // ~ ^
+
+  key <AC01> { [          a,           A,         ae,         AE ] };
+  key <AC02> { [          o,           O,     oslash,     Oslash ] };
+  key <AC03> { [          e,           E,   approxeq,   notequal ] };
+  key <AC04> { [          u,           U,         at,         at ] };
+  key <AC05> { [          i,           I,  identical,      U2245 ] };
+  key <AC06> { [          d,           D,        eth,        ETH ] };
+  key <AC07> { [          h,           H,       Left,  leftarrow ] };
+  key <AC08> { [          t,           T,      thorn,      THORN ] };
+  key <AC09> { [          n,           N,         at,         at ] };
+  key <AC10> { [          s,           S,      U017F,         at ] };
+  key <AC11> { [      minus,  underscore, dead_belowdot, dead_macron ] };
+  key <BKSL> { [ apostrophe,    asterisk,      grave,   multiply ] }; // ` ×
+
+  key <AB01> { [     period,       colon, periodcentered, dead_abovedot ] };
+  key <AB02> { [          q,           Q,      U230A,      U2308 ] };
+  key <AB03> { [          j,           J,       Down,  downarrow ] };
+  key <AB04> { [          k,           K,         Up,    uparrow ] };
+  key <AB05> { [          x,           X,         at,         at ] };
+  key <AB06> { [          b,           B,         at,         at ] };
+  key <AB07> { [          m,           M,         at,         at ] };
+  key <AB08> { [          w,           W,         at,         at ] };
+  key <AB09> { [          v,           V,         at,         at ] };
+  key <AB10> { [          z,           Z,         at,         at ] };
+};
+
+
+//-- Stuff... unused, saved for the future --------------------------
+hidden partial alphanumeric_keys xkb_symbols "keycap-symbols" {
+  replace key <TAB>   { type="THREE_LEVEL", [ _, _, U21B9        ] };
+  replace key <CAPS>  { type="THREE_LEVEL", [ _, _, U2388        ] };
+  replace key <LWIN>  { type="THREE_LEVEL", [ _, _, U2B25        ] };
+  replace key <LALT>  { type="THREE_LEVEL", [ _, _, U2325        ] };
+  replace key <RTSH>  { type="THREE_LEVEL", [ _, _, U21E7        ] };
+  replace key <DELE>  { type="THREE_LEVEL", [ _, _, U2326        ] };
+  replace key <BKSP>  { type="FOUR_LEVEL",  [ _, _, U232B, U2190 ] };
+  replace key <RTRN>  { type="FOUR_LEVEL",  [ _, _, U23CE, U21B5 ] };
+  replace key <SPCE>  { type="THREE_LEVEL", [ _, _, U2423        ] };
+};
+
+// Based on the Space-cadet keyboard
+// http://en.wikipedia.org/wiki/File:Space-cadet.jpg
+hidden partial alphanumeric_keys xkb_symbols "spacecadet-altgr-mixin" {
+  key <AD01> { [ _, _,       logicaland ] };
+  key <AD02> { [ _, _,        logicalor ] };
+  key <AD03> { [ _, _,     intersection ] };
+  key <AD04> { [ _, _,            union ] };
+  key <AD05> { [ _, _,       includedin ] };
+  key <AD06> { [ _, _,         includes ] };
+  key <AD07> { [ _, _,            U2200 ] }; // U+2200 FOR ALL
+  key <AD08> { [ _, _,         infinity ] };
+  key <AD09> { [ _, _,            U2203 ] }; // U+2203 THERE EXISTS
+  key <AD10> { [ _, _,            U2202 ] }; // U+2202 INFINITY
+
+  key <AC01> { [ _, _,           uptack ] };
+  key <AC02> { [ _, _,         downtack ] };
+  key <AC03> { [ _, _,        righttack ] };
+  key <AC04> { [ _, _,         lefttack ] };
+  key <AC05> { [ _, _,          uparrow ] };
+  key <AC06> { [ _, _,        downarrow ] };
+  key <AC07> { [ _, _,        leftarrow ] };
+  key <AC08> { [ _, _,       rightarrow ] };
+  key <AC09> { [ _, _,            U2194 ] }; // U+2194 LEFT RIGHT ARROW
+
+  key <AB01> { [ _, _,            U230A ] }; // U+230A LEFT FLOOR
+  key <AB02> { [ _, _,            U2308 ] }; // U+2308 LEFT CEILING
+  key <AB03> { [ _, _,         notequal ] };
+  key <AB04> { [ _, _,            U2243 ] }; // U+2243 ASYMPTOTICALLY EQUAL TO
+  key <AB05> { [ _, _,        identical ] };
+  key <AB06> { [ _, _,    lessthanequal ] };
+  key <AB07> { [ _, _, greaterthanequal ] };
+  key <AB08> { [ _, _,             less ] };
+  key <AB09> { [ _, _,          greater ] };
+};
+
+// ⋆ ￮ ⌹ ⌽ ⊖ ⍋ ⍒ ⍟ ⍎ ⍕ ⍉ ⍱ ⍲ ⌿ ⍀ ∼
+// + - × ÷ ? ∈ ⌈ ⌊ ρ ↑ ↓ ⊥ ⊤ | , \ / ι ! < ≤ = ≥ > ≠ ∨ ∧ ~ . ∘.
+
+// Old altgr layout
+hidden partial alphanumeric_keys xkb_symbols "firefly-altgr-old-mixin" {
+  key <AD01> { [ _, _,   logicaland,            U2200 ] }; // U+2200 FOR ALL
+  key <AD02> { [ _, _,    logicalor,            U2203 ] }; // U+2203 THERE EXISTS
+  key <AD03> { [ _, _,        union,           uptack ] };
+  key <AD04> { [ _, _, intersection,         downtack ] };
+  key <AD05> { [ _, _,   includedin,            U2286 ] }; // U+2286 SUBSET OF OR EQUAL TO
+  key <AD06> { [ _, _,     includes,            U2287 ] }; // U+2287 SUPERSET OF OR EQUAL TO
+  key <AD07> { [ _, _,          jot,            U2219 ] }; // U+2219 BULLET OPERATOR
+  key <AD08> { [ _, _,           at,               at ] };
+  key <AD09> { [ _, _,           at,               at ] };
+  key <AD10> { [ _, _,           at,               at ] };
+  key <AD11> { [ _, _,      radical,      dead_ogonek ] };
+
+  key <AC01> { [ _, _,           ae,               AE ] };
+  key <AC02> { [ _, _,       oslash,           Oslash ] };
+  key <AC03> { [ _, _,           at,               at ] };
+  key <AC04> { [ _, _,           at,               at ] };
+  key <AC05> { [ _, _,     infinity,               at ] };
+  key <AC06> { [ _, _,           at,               at ] };
+  key <AC07> { [ _, _,    leftarrow,            U21D0 ] };  // U+21D0 LEFTWARDS DOUBLE ARROW
+  key <AC08> { [ _, _,    downarrow,         ifonlyif ] };
+  key <AC09> { [ _, _,      uparrow,            U21A6 ] };
+  key <AC10> { [ _, _,   rightarrow,          implies ] };
+
+  key <AB01> { [ _, _, periodcentered,  dead_abovedot ] };
+  key <AB02> { [ _, _,    therefore,          because ] };
+  key <AB03> { [ _, _,    elementof,     notelementof ] };
+  key <AB04> { [ _, _,   containsas,            U220C ] };  // U+220C DOES NOT CONTAIN AS MEMBER
+  key <AB05> { [ _, _,        equal,         notequal ] };
+  key <AB06> { [ _, _,    identical,     notidentical ] };
+  key <AB07> { [ _, _,         less,    lessthanequal ] };
+  key <AB08> { [ _, _,      greater, greaterthanequal ] };
+  key <AB09> { [ _, _,     approxeq,            U2249 ] };  // U+2249 NOT ALMOST EQUAL TO
+};
+
+
+//-- Notes to self --------------------------------------------------
+// % xkbcomp :0 -
+// ISO_Group_Shift, ISO_Next_Group{,_Lock,Latch}, Mode_switch
+
+// vim:syn=xkb

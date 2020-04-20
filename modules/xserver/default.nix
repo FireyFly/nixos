@@ -28,11 +28,17 @@ in {
 
     # keyboard
     services.xserver = {
-      # (TODO: firefly layout)
-      layout = "se";
-      xkbVariant = "dvorak";
-      xkbOptions = "caps:escape";
+      extraLayouts = {
+        firefly = {
+          description = "FireFly's custom layout";
+          languages = [ "eng" ];
+          symbolsFile = ./firefly.symbols;
+        };
+      };
+      layout = "firefly";
     };
+
+    services.xserver.displayManager.sessionCommands = "${pkgs.xcape}/bin/xcape";
 
     # trackpad (synaptics)
     services.xserver.synaptics = {
