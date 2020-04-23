@@ -11,11 +11,11 @@ in {
   config = lib.mkIf cfg.enableSDR {
     boot.blacklistedKernelModules = [ "dvb_usb_rtl28xxu" ];
     services.udev.packages = [ pkgs.rtl-sdr ];
-    environment.systemPackages = with pkgs; [
-      gqrx
-      multimon-ng
-      inspectrum
-      sox
+    environment.systemPackages = [
+      pkgs.gqrx
+      pkgs.multimon-ng
+      pkgs.inspectrum
+      pkgs.sox
     ];
   };
 }

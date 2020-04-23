@@ -27,12 +27,12 @@ in {
       "vboxusers"
     ];
 
-    users.users.firefly.packages = with pkgs; filterNonNull [
-      plaintext
-      up
-      (ifX11 scrup)
-      (ifX11 katarakt)
-      (ifX11 pangoterm)
+    users.users.firefly.packages = filterNonNull [
+      pkgs.plaintext
+      pkgs.up
+      (ifX11 pkgs.scrup)
+      (ifX11 pkgs.katarakt)
+      (ifX11 pkgs.pangoterm)
     ];
 
     mine.users.users.firefly = {

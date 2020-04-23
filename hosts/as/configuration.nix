@@ -33,11 +33,11 @@ in {
   hardware.cpu.intel.updateMicrocode = true;
 
   #-- system packages -----------------------------------------------
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     # for KDE applications
-    kdeFrameworks.kxmlgui
+    pkgs.kdeFrameworks.kxmlgui
     # for WoW
-    wineWowPackages.staging
+    pkgs.wineWowPackages.staging
   ];
 
   #-- services etc --------------------------------------------------

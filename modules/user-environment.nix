@@ -2,6 +2,7 @@
 
 let
   inherit (lib) mapAttrsToList toList isList concatStringsSep mkOption types;
+  inherit (types) attrsOf listOf loaOf submodule either str;
 
   cfg = config.mine.users;
 
@@ -19,7 +20,7 @@ let
       environment = mkOption {
         # adapted from nixos shells-environment.nix
         default = {};
-        type = with types; attrsOf (either str (listOf str));
+        type = attrsOf (either str (listOf str));
         apply = lib.mapAttrs (n: v: if isList v then concatStringsSep ":" v else v);
         example = { EDITOR = "nvim"; };
         description = ''
@@ -40,7 +41,7 @@ in {
 
     mine.users.users = mkOption {
       default = {};
-      type = with types; loaOf (submodule userOpts);
+      type = loaOf (submodule userOpts);
       example = {
         alice = {
           environment = { EDITOR = "nvim"; };

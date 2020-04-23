@@ -2,10 +2,11 @@
   perl, libtool, pkgconfig,
 }:
 
-with stdenv.lib;
+let
+  inherit (stdenv.lib) maintainers licenses platforms;
 
 # mostly borrows from neovim-libvterm in the neovim package
-stdenv.mkDerivation rec {
+in stdenv.mkDerivation rec {
   name = "pangoterm-libvterm-${version}";
   version = "767";
 

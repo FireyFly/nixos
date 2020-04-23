@@ -3,9 +3,9 @@
   glib, cairo, gtk2,
 }:
 
-with stdenv.lib;
-
 let
+  inherit (stdenv.lib) maintainers licenses platforms;
+
   libvterm = import ./libvterm.nix { inherit stdenv fetchbzr perl libtool pkgconfig; };
 
 in stdenv.mkDerivation rec {
