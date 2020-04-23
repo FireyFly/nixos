@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   hardwareConfigPath = ./hardware-configuration.nix;
@@ -11,10 +11,13 @@ let
 in {
 # nixpkgs.config.allowUnfreePredicate = (x: pkgs.lib.hasPrefix "unrar" x.name);
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowBroken = true; # for luaexpat, needed for prosody
 
   imports = [ hardwareConfigPath ] ++ myModuleList;
 
   networking.hostName = "hagall"; # Define your hostname.
+
+  networking.nameservers = [ "8.8.4.4" ];
 
   # boot and hw
   boot.loader.grub.enable = true;
