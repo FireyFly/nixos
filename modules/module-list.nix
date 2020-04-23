@@ -1,12 +1,12 @@
 [
-  # generic support modules
-  ./config/user-environment.nix
+  ./secrets.nix
 
   # system profiles
   ./profiles/common.nix
   ./profiles/laptop.nix
 
   # modules
+  ./config/user-environment.nix
   ./biboumi.nix
 
   # shared system config
