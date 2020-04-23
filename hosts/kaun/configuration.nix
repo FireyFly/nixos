@@ -4,7 +4,7 @@
 
 let
   hardwareConfigPath = ./hardware-configuration.nix;
-  myModuleList = import ../../modules/module-list.nix;
+  myModuleList = import ../../module-list.nix;
 
 in {
   nixpkgs.config.allowUnfreePredicate = (x: pkgs.lib.hasPrefix "ttf-envy-code-r" x.name);

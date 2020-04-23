@@ -23,7 +23,7 @@ in {
     # TODO: nix, nixpkgs configuration
 
     nixpkgs.overlays = [
-      (import ../../packages/overlay.nix)
+      (import ../packages/overlay.nix)
     ];
 
     boot.cleanTmpDir = lib.mkDefault true;

@@ -4,7 +4,7 @@
 
 let
   hardwareConfigPath = ./hardware-configuration.nix;
-  myModuleList = import ../../modules/module-list.nix;
+  myModuleList = import ../../module-list.nix;
 
 in {
   nixpkgs.config.allowUnfree = true;
