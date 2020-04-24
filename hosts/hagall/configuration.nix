@@ -4,48 +4,45 @@
 
 { config, pkgs, lib, ... }:
 
-let
-  hardwareConfigPath = ./hardware-configuration.nix;
-  myModuleList = import ../../module-list.nix;
+{
+  imports = (import ../../module-list.nix) ++ [
+    <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
+    ./certs.nix ./webserver.nix ./xmpp.nix
+  ];
 
-in {
-# nixpkgs.config.allowUnfreePredicate = (x: pkgs.lib.hasPrefix "unrar" x.name);
-  nixpkgs.config.allowUnfree = true;
+  nix.maxJobs = 2;
+  nixpkgs.config.allowUnfree = true; # for unrar
   nixpkgs.config.allowBroken = true; # for luaexpat, needed for prosody
 
-  imports = [ hardwareConfigPath ] ++ myModuleList;
+  networking.hostName = "hagall";
 
-  networking.hostName = "hagall"; # Define your hostname.
+  boot = {
+    loader.grub.enable = true;
+    loader.grub.version = 2;
+    loader.grub.device = "/dev/vda";
+    initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk" ];
+  };
 
-  networking.nameservers = [ "8.8.4.4" ];
+  fileSystems."/" = {
+    label = "hagall-root";
+    fsType = "ext4";
+  };
 
-  # boot and hw
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/vda";
+  swapDevices = [
+    { label = "hagall-swap"; }
+  ];
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
   networking.useDHCP = false;
   networking.interfaces.ens3.useDHCP = true;
+  networking.nameservers = [ "8.8.4.4" ];
 
   programs.mosh.enable = true;
   programs.tmux.enable = true;
 
-  users.users = lib.mkIf config.mine.enableUser {
-    firefly.openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN9i8fs10/BjNEqFXD+3fQeQ0SuHnQx4WpuqUg4caeed firefly@as"
-    ];
-  };
+  users.users.firefly.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN9i8fs10/BjNEqFXD+3fQeQ0SuHnQx4WpuqUg4caeed firefly@as"
+  ];
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.03"; # Did you read the comment?
-
+  # stateful data lock
+  system.stateVersion = "20.03";
 }
-
