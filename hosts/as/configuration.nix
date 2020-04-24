@@ -14,7 +14,6 @@
   mine.services.xserver.emitMediaKeyEvents = true;
   mine.enableSDR = true;
 
-  #-- boot, fs, hardware --------------------------------------------
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
@@ -43,22 +42,15 @@
   hardware.enableRedistributableFirmware = true;
   powerManagement.cpuFreqGovernor = "powersave";
 
-  #-- system packages -----------------------------------------------
   environment.systemPackages = [
     # for KDE applications
     pkgs.kdeFrameworks.kxmlgui
-    # for WoW
-    pkgs.wineWowPackages.staging
   ];
 
-  #-- services etc --------------------------------------------------
   virtualisation.virtualbox.host.enable = true;
 
   services.xserver.videoDrivers = ["intel" "vesa" "modesetting" ];
 
-  # This value determines the NixOS release with which your system is to be
-  # compatible, in order to avoid breaking some software such as database
-  # servers. You should change this only after NixOS release notes say you
-  # should.
-  system.stateVersion = "17.09"; # Did you read the comment?
+  # stateful data lock
+  system.stateVersion = "17.09";
 }
