@@ -2,14 +2,11 @@
 # See nixos-help, configuration.nix(5)
 { config, pkgs, ... }:
 
-let
-  hardwareConfigPath = ./hardware-configuration.nix;
-  myModuleList = import ../../module-list.nix;
+{
+  imports = import ../../module-list.nix;
 
-in {
+  nix.maxJobs = 4;
   nixpkgs.config.allowUnfree = true;
-
-  imports = [ hardwareConfigPath ] ++ myModuleList;
 
   networking.hostName = "as";
 
@@ -17,13 +14,25 @@ in {
   mine.services.xserver.emitMediaKeyEvents = true;
   mine.enableSDR = true;
 
-  #-- boot & hw -----------------------
+  #-- boot, fs, hardware --------------------------------------------
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
 
+    initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
     initrd.supportedFilesystems = [ "ext4" ];
+
+    kernelModules = [ "kvm-intel" ];
     supportedFilesystems = [ "ext4" ];
+  };
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/nixos-rootfs";
+    fsType = "ext4";
+  };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/0AF3-24F0";
+    fsType = "vfat";
   };
 
   swapDevices = [
@@ -31,6 +40,8 @@ in {
   ];
 
   hardware.cpu.intel.updateMicrocode = true;
+  hardware.enableRedistributableFirmware = true;
+  powerManagement.cpuFreqGovernor = "powersave";
 
   #-- system packages -----------------------------------------------
   environment.systemPackages = [
