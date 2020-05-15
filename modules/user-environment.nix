@@ -1,27 +1,23 @@
 { config, lib, utils, pkgs, ... }:
 
 let
-  inherit (lib) mapAttrsToList toList isList concatStringsSep mkOption types;
-  inherit (types) attrsOf listOf loaOf submodule either str;
-
+  t = lib.types;
   cfg = config.mine.users;
 
-  # adapted from nixos shells-environment.nix
   exportStringOf = vars:
     let
-      exportStringOfOne = n: v: ''export ${n}="${concatStringsSep ":" v}"'';
-      exportVariables = mapAttrsToList exportStringOfOne (lib.mapAttrs (n: toList) vars);
+      exportStringOfOne = n: v: ''export ${n}="${lib.concatStringsSep ":" v}"'';
+      exportVariables = lib.mapAttrsToList exportStringOfOne (lib.mapAttrs (n: lib.toList) vars);
     in
-      concatStringsSep "\n" exportVariables;
+      lib.concatStringsSep "\n" exportVariables;
 
   userOpts = {
     options = {
 
-      environment = mkOption {
-        # adapted from nixos shells-environment.nix
+      environment = lib.mkOption {
         default = {};
-        type = attrsOf (either str (listOf str));
-        apply = lib.mapAttrs (n: v: if isList v then concatStringsSep ":" v else v);
+        type = t.attrsOf (t.either t.str (t.listOf t.str));
+        apply = lib.mapAttrs (n: v: if lib.isList v then lib.concatStringsSep ":" v else v);
         example = { EDITOR = "nvim"; };
         description = ''
           A set of user-specific environment variables to be bound during
@@ -39,9 +35,9 @@ in {
 
   options = {
 
-    mine.users.users = mkOption {
+    mine.users.users = lib.mkOption {
       default = {};
-      type = loaOf (submodule userOpts);
+      type = t.loaOf (t.submodule userOpts);
       example = {
         alice = {
           environment = { EDITOR = "nvim"; };
@@ -54,9 +50,7 @@ in {
 
   };
 
-  config = {
     environment.etc =
-      # adapted from nixos users-groups.nix
       (lib.mapAttrs' (name: { environment, ... }: {
         name = "environments/per-user/${name}";
         value.text = ''
