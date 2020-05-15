@@ -1,0 +1,26 @@
+#!@shell@
+
+if [ $# -lt 1 ]; then
+  echo >&2 "Usage: $(@basename@ "$0") <filename>"
+  exit 1
+fi
+
+for f in "$@"; do
+  target="$(@basename@ "$f")"
+
+  # Preprocessing
+  case "$f" in
+    *.jpg)  # Strip GPS metadata
+      cp "$f" /tmp/"$target"
+      f=/tmp/"$target"
+      @exiftool@ -q -gps:all= -xmp:all= "$f"
+      ;;
+  esac
+
+  # Upload
+  path="tmp/$target"
+  @rsync@ --info=progress2 -az "$f" @host@:@hostLocation@/"$path"
+done
+
+@xclip@ -i <<<"@clipboardPrefix@$path"
+@xclip@ -selection clipboard -i <<<"@clipboardPrefix@$path"
