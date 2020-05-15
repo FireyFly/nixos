@@ -62,6 +62,10 @@ in {
 
     #-- programs ------------------------
     programs.zsh.enable = true;
+    programs.zsh.shellInit = ''
+      eval "$(${pkgs.any-nix-shell}/bin/any-nix-shell zsh)"
+    '';
+
     programs.ssh.askPassword = "";
     programs.mtr.enable = true;
     environment.systemPackages = with pkgs; [
@@ -72,7 +76,9 @@ in {
       bind finger_bsd lftp whois
       mosh wget
       # compression
-      p7zip unrar unzip zip
+      unzip zip
+      #p7zip   # 2020-04-30: marked insecure (CVEs)
+      #unrar   # nonfree
       # reveng etc
       hexd pixd colordiff vbindiff
       # useful tools
