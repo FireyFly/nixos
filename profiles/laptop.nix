@@ -44,6 +44,7 @@ in {
       scrup
       katarakt
       pangoterm
+      alacritty
     ];
   };
 }
