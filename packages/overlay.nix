@@ -9,6 +9,8 @@ rec {
   charselect = super.callPackage ./charselect { inherit ucd; };
 
   katarakt = super.libsForQt5.callPackage ./katarakt {};
+  libucl = super.callPackage ./libucl {};
+
   pangoterm = super.callPackage ./pangoterm {};
   jevalbot = super.callPackage ./jevalbot {};
 
