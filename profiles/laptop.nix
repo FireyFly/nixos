@@ -39,5 +39,11 @@ in {
 
     programs.ssh.startAgent = true;
     programs.wireshark.enable = true;
+
+    environment.systemPackages = with pkgs; [
+      scrup
+      katarakt
+      pangoterm
+    ];
   };
 }

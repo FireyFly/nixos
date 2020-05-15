@@ -72,6 +72,8 @@ in {
       manpages
       # standard tools
       bc file htop psmisc tree
+      # utilities
+      plaintext charselect up
       # network
       bind finger_bsd lftp whois
       mosh wget
