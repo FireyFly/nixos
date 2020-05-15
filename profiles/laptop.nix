@@ -27,6 +27,8 @@ in {
       enable = true;
     };
 
+    services.interception-tools.enable = true;
+
     # TODO: services.mpd
 
     services.logind.lidSwitch = "ignore";

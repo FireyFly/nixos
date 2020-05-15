@@ -38,8 +38,6 @@ in {
       layout = "firefly";
     };
 
-    services.xserver.displayManager.sessionCommands = "${pkgs.xcape}/bin/xcape";
-
     # trackpad (synaptics)
     services.xserver.synaptics = {
       accelFactor = "0.1";
