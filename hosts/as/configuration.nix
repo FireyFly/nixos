@@ -1,18 +1,18 @@
 # NixOS system configuration
 # See nixos-help, configuration.nix(5)
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = import ../../module-list.nix;
 
   nix.maxJobs = 4;
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate =
+    x: lib.hasPrefix "ttf-envy-code-r" x.name;
 
   networking.hostName = "as";
 
   mine.profiles.laptop.enable = true;
   mine.services.xserver.emitMediaKeyEvents = true;
-  mine.enableSDR = true;
 
   boot = {
     loader.systemd-boot.enable = true;
@@ -38,6 +38,8 @@
     { label = "swap"; }
   ];
 
+  services.fstrim.enable = true;
+
   hardware.cpu.intel.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
   powerManagement.cpuFreqGovernor = "powersave";
@@ -46,6 +48,8 @@
     # for KDE applications
     pkgs.kdeFrameworks.kxmlgui
   ];
+
+  programs.hikari.enable = true;
 
   virtualisation.virtualbox.host.enable = true;
 
