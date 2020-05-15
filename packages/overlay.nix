@@ -10,6 +10,7 @@ rec {
 
   katarakt = super.libsForQt5.callPackage ./katarakt {};
   libucl = super.callPackage ./libucl {};
+  hikari = super.callPackage ./hikari { inherit libucl; };
 
   pangoterm = super.callPackage ./pangoterm {};
   jevalbot = super.callPackage ./jevalbot {};

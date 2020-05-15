@@ -7,6 +7,7 @@
   # modules
   ./modules/user-environment.nix
   ./modules/biboumi.nix
+  ./modules/hikari.nix
   ./modules/secrets.nix
 
   # system config
