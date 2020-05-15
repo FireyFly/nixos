@@ -30,6 +30,7 @@ in {
     users.users.firefly.packages = filterNonNull [
       pkgs.plaintext
       pkgs.up
+      pkgs.charselect
       (ifX11 pkgs.scrup)
       (ifX11 pkgs.katarakt)
       (ifX11 pkgs.pangoterm)

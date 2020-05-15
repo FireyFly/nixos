@@ -1,14 +1,16 @@
 self: super:
 
-{
-  # My own tools
-  plaintext = self.callPackage ./plaintext {};
-  up = self.callPackage ./up {};
-  scrup = self.callPackage ./scrup {};
 
-  # Other packages
-  katarakt = self.libsForQt5.callPackage ./katarakt {};
-  pangoterm = self.callPackage ./pangoterm {};
+rec {
+  plaintext = super.callPackage ./plaintext {};
+  up = super.callPackage ./up {};
+  scrup = super.callPackage ./scrup {};
+  ucd = super.callPackage ./ucd {};
+  charselect = super.callPackage ./charselect { inherit ucd; };
+
+  katarakt = super.libsForQt5.callPackage ./katarakt {};
+  pangoterm = super.callPackage ./pangoterm {};
+  jevalbot = super.callPackage ./jevalbot {};
 
   # Fixes
   inspectrum = self.libsForQt5.callPackage ./inspectrum {};
