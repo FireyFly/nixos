@@ -50,6 +50,17 @@ in {
 
   };
 
+  config = let
+    initScript = ''
+      # setup user-specific environment variables
+      if [ -z "$__NIXOS_USER_ENV_DONE" ]; then
+        if [ -e "/etc/environments/per-user/$USER" ]; then
+          . "/etc/environments/per-user/$USER"
+          __NIXOS_USER_ENV_DONE=1
+        fi
+      fi
+    '';
+  in {
     environment.etc =
       (lib.mapAttrs' (name: { environment, ... }: {
         name = "environments/per-user/${name}";
@@ -60,12 +71,8 @@ in {
         '';
       }) (lib.filterAttrs (_: u: u.environment != {}) cfg.users));
 
-    environment.extraInit = ''
-    # setup user-specific environment variables
-    if [ -x "/etc/environments/per-user/$USER" ]; then
-      . "/etc/environments/per-user/$USER"
-    fi
-    '';
+    environment.extraInit = initScript;
+    environment.shellInit = initScript;
   };
 
 }
