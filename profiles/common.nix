@@ -20,7 +20,11 @@ in {
   config = lib.mkIf cfg.enable {
     documentation.dev.enable = true;
 
-    # TODO: nix, nixpkgs configuration
+    nix.trustedUsers = [ "root" "@wheel" ];
+    nix.nixPath = [
+      "nixpkgs=/etc/nixos/nixpkgs"
+      "nixos-config=/etc/nixos/configuration.nix"
+    ];
 
     nixpkgs.overlays = [
       (import ../packages/overlay.nix)
