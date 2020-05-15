@@ -45,6 +45,17 @@ in {
       passwordAuthentication = false;
     };
 
+    #-- networking ----------------------
+    networking.networkmanager = {
+      ethernet.macAddress = "random";
+      wifi.macAddress = "random";
+      extraConfig = ''
+        [connection-extra]
+        ethernet.generate-mac-address-mask=FE:FF:FF:00:00:00
+        wifi.generate-mac-address-mask=FE:FF:FF:00:00:00
+      '';
+    };
+
     #-- programs ------------------------
     programs.zsh.enable = true;
     programs.ssh.askPassword = "";
