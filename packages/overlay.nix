@@ -4,8 +4,7 @@ rec {
   plaintext = super.callPackage ./plaintext {};
   up = super.callPackage ./up {};
   scrup = super.callPackage ./scrup {};
-  ucd = super.callPackage ./ucd {};
-  charselect = super.callPackage ./charselect { inherit ucd; };
+  charselect = super.callPackage ./charselect {};
 
   katarakt = super.libsForQt5.callPackage ./katarakt {};
   libucl = super.callPackage ./libucl {};

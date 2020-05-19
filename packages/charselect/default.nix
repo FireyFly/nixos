@@ -1,4 +1,4 @@
-{ stdenv, ripgrep, zsh, ucd }:
+{ stdenv, ripgrep, zsh, unicode-character-database }:
 
 let
   lib = import ../../lib;
@@ -7,7 +7,7 @@ in lib.mkScriptDerivation {
   name = "charselect";
   src = ./charselect.in;
 
-  inherit ucd;
+  ucd = "${unicode-character-database}/share/unicode";
   shell = "${zsh}/bin/zsh";
   grep = "${ripgrep}/bin/rg";
 }
