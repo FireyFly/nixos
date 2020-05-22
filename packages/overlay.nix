@@ -6,6 +6,15 @@ rec {
   scrup = super.callPackage ./scrup {};
   charselect = super.callPackage ./charselect {};
 
+  mpc-helper = super.writeShellScriptBin "mpc-helper" ''
+    fmt='[%artist% - ][%title%|%file%]'
+    case "$1" in
+      grab) ${self.mpc_cli}/bin/mpc -f "$fmt" current >>$HOME/media/music/grabs ;;
+      copy) ${self.mpc_cli}/bin/mpc -f "$fmt" current | ${self.wl-clipboard}/bin/wl-copy ;;
+      *) echo >&2 "$0: unknown command $1"; exit 1 ;;
+    esac
+  '';
+
   katarakt = super.libsForQt5.callPackage ./katarakt {};
   libucl = super.callPackage ./libucl {};
 
