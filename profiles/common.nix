@@ -95,9 +95,8 @@ in {
       w3m jq ripgrep xmlformat
       #mandoc
       j
-      # etc
       vim_configurable
-      git
+      git # or git-minimal?
     ];
 
     #-- users ---------------------------

@@ -40,11 +40,39 @@ in {
     programs.ssh.startAgent = true;
     programs.wireshark.enable = true;
 
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = with pkgs; let
+      when = cond: arr: if cond then arr else [];
+    in [
+      # cli tools
       scrup
+      pass
+      gnupg
+      openssl
+      sshfs-fuse
+      youtube-dl
+      # gui tools
       katarakt
+      mpv
+      wireshark-cli
+      # hardware
+      acpitool usbutils pciutils
+      dfu-util lm_sensors smartmontools
+      # development
+      nodejs lua gdb python3 clang
+      # music
+      mpd mpc_cli mpc-helper ncmpcpp
+      ponymix
+    ] ++ when config.services.xserver.enable [
       pangoterm
+      firefox
+      feh
+      scrot
+      xclip
+    ] ++ when config.programs.hikari.enable [
       alacritty
+      firefox-wayland
+      wl-clipboard
+      waybar
     ];
 
     # fonts
