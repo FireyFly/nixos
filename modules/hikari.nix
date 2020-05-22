@@ -9,7 +9,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    security.wrappers.hikari.source = "${pkgs.hikari}/bin/hikari";
-    security.wrappers.hikari-unlocker.source = "${pkgs.hikari}/bin/hikari-unlocker";
+    environment.systemPackages = [ pkgs.hikari ];
+  # security.wrappers.hikari-unlocker.source = "${pkgs.hikari}/bin/hikari-unlocker";
+    hardware.opengl.enable = true;
   };
 }
