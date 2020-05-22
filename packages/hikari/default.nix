@@ -31,8 +31,10 @@ stdenv.mkDerivation rec {
     openpam
   ];
 
-  makeFlags = [ "WITH_POSIX_C_SOURCE=YES" ]
-    ++ (lib.optional enableXWayland "WITH_XWAYLAND=YES")
+  makeFlags = [
+    "WITH_POSIX_C_SOURCE=YES"
+    "WITHOUT_SUID=yes"
+  ] ++ (lib.optional enableXWayland "WITH_XWAYLAND=YES")
     ++ (lib.optional enableScreencopy "WITH_SCREENCOPY=YES")
     ++ (lib.optional enableGammaControl "WITH_GAMMACONTROL=YES")
     ++ (lib.optional enableLayerShell "WITH_LAYERSHELL=YES");
