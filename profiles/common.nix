@@ -73,7 +73,15 @@ in {
       # standard tools
       bc file htop psmisc tree
       # utilities
-      plaintext charselect up
+      plaintext charselect
+      (up.override {
+        clipboardCommand =
+          if config.services.xserver.enable
+          then "${xclip}/bin/xcilp -selection clipboard -i"
+          else if config.programs.hikari.enable
+          then "${wl-clipboard}/bin/wl-copy"
+          else "cat";
+      })
       # network
       bind finger_bsd lftp whois
       mosh wget

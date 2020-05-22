@@ -1,4 +1,6 @@
-{ stdenv, coreutils, exiftool, rsync, xclip }:
+{ stdenv, coreutils, exiftool, rsync, xclip
+, clipboardCommand ? "cat"
+}:
 
 let
   lib = import ../../lib;
@@ -14,5 +16,6 @@ in lib.mkScriptDerivation {
   basename = "${coreutils}/bin/basename";
   exiftool = "${exiftool}/bin/exiftool";
   rsync = "${rsync}/bin/rsync";
-  xclip = "${xclip}/bin/xclip";
+
+  inherit clipboardCommand;
 }

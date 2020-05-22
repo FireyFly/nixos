@@ -22,5 +22,4 @@ for f in "$@"; do
   @rsync@ --info=progress2 -az "$f" @host@:@hostLocation@/"$path"
 done
 
-@xclip@ -i <<<"@clipboardPrefix@$path"
-@xclip@ -selection clipboard -i <<<"@clipboardPrefix@$path"
+@clipboardCommand@ <<<"@clipboardPrefix@$path"
