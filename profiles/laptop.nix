@@ -45,7 +45,6 @@ in {
     in [
       # cli tools
       scrup
-      pass
       gnupg
       openssl
       sshfs-fuse
@@ -68,11 +67,13 @@ in {
       feh
       scrot
       xclip
+      pass
     ] ++ when config.programs.hikari.enable [
       alacritty
       firefox-wayland
       wl-clipboard
-      waybar
+      imv
+      pass-wayland
     ];
 
     # fonts
