@@ -12,6 +12,7 @@
 
   # system config
   ./config/herbstluftwm
+  ./config/hikari
   ./config/xserver
   ./config/user.nix
 ]
