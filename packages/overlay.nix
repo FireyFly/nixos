@@ -35,6 +35,11 @@ rec {
   # Fixes
   inspectrum = self.libsForQt5.callPackage ./inspectrum {};
 
+  waybar = super.waybar.override {
+    pulseSupport = true;
+    swaySupport = false;
+  };
+
   # patch out the Esc->Caps transform (pass through Esc unchanged)
   interception-tools-plugins = super.interception-tools-plugins // {
     caps2esc = super.interception-tools-plugins.caps2esc.overrideAttrs (_: {
