@@ -26,18 +26,6 @@ in {
       opengl.extraPackages32 = [ pkgs.pkgsi686Linux.libva ];
     };
 
-    # keyboard
-    services.xserver = {
-      extraLayouts = {
-        firefly = {
-          description = "FireFly's custom layout";
-          languages = [ "eng" ];
-          symbolsFile = ./firefly.symbols;
-        };
-      };
-      layout = "firefly";
-    };
-
     # trackpad (synaptics)
     services.xserver.synaptics = {
       accelFactor = "0.1";
@@ -52,6 +40,7 @@ in {
 
     # trackpad (libinput)
     services.xserver.libinput = {
+      enable = true;
       accelSpeed = "0.6";
       disableWhileTyping = true;
       tappingDragLock = false;
