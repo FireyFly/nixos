@@ -1,4 +1,4 @@
-{ config, lib, utils, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   t = lib.types;
@@ -21,10 +21,16 @@ let
           t.str
           (t.listOf (t.either t.path t.str))
         ]);
-        apply = lib.mapAttrs (n: v:
+        apply = let
+          mapper = x:
+            if builtins.typeOf x == "path"
+            then pkgs.copyPathToStore x
+            else x;
+
+        in lib.mapAttrs (n: v:
           if lib.isList v
-          then lib.concatStringsSep ":" (map toString v)
-          else toString v
+          then lib.concatStringsSep ":" (map mapper v)
+          else mapper v
         );
         example = { EDITOR = "nvim"; };
         description = ''
