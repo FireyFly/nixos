@@ -16,8 +16,16 @@ let
 
       environment = lib.mkOption {
         default = {};
-        type = t.attrsOf (t.either t.str (t.listOf t.str));
-        apply = lib.mapAttrs (n: v: if lib.isList v then lib.concatStringsSep ":" v else v);
+        type = t.attrsOf (t.oneOf [
+          t.path
+          t.str
+          (t.listOf (t.either t.path t.str))
+        ]);
+        apply = lib.mapAttrs (n: v:
+          if lib.isList v
+          then lib.concatStringsSep ":" (map toString v)
+          else toString v
+        );
         example = { EDITOR = "nvim"; };
         description = ''
           A set of user-specific environment variables to be bound during
