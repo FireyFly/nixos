@@ -49,11 +49,8 @@
     pkgs.kdeFrameworks.kxmlgui
   ];
 
-  programs.hikari.enable = true;
 
-  virtualisation.virtualbox.host.enable = true;
 
-  services.xserver.videoDrivers = ["intel" "vesa" "modesetting" ];
 
   # stateful data lock
   system.stateVersion = "17.09";

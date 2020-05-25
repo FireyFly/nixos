@@ -18,15 +18,9 @@ in {
       bluetooth.enable = true;
     };
 
-    services.xserver = {
-      enable = true;
-      libinput.enable = true;
-    };
+    programs.hikari.enable = true;
 
-    services.pcscd = {
-      enable = true;
-    };
-
+    services.pcscd.enable = true;
     services.interception-tools.enable = true;
 
     # TODO: services.mpd
@@ -73,6 +67,7 @@ in {
       firefox-wayland
       wl-clipboard
       imv
+      grim
       pass-wayland
     ];
 
