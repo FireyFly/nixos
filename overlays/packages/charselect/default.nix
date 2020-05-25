@@ -1,7 +1,7 @@
 { stdenv, ripgrep, zsh, unicode-character-database }:
 
 let
-  lib = import ../../lib;
+  lib = import <lib>;
 
 in lib.mkScriptDerivation {
   name = "charselect";

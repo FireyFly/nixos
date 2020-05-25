@@ -26,9 +26,10 @@ I clone this repo as my */etc/nixos*, symlinking the host-specific
   pick-and-choose from, for instance depending on what type of machine a
   specific host is.
 
-* *packages/* --
-  Personal overlay of packages.
+* *overlays/* --
+  Various overlays, either adding new packages or patching existing ones.
 
 * (*secrets/*) --
   Not actually present in the repository, this directory is imported from
-  the secrets.nix module and contains keys and other sensitive data.
+  the secrets.nix module and contains keys and other sensitive data (but
+  nothing that I'm not comfortable with keeping in the nix store).

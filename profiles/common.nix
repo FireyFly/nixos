@@ -22,13 +22,11 @@ in {
 
     nix.trustedUsers = [ "root" "@wheel" ];
     nix.nixPath = [
-      "nixpkgs=/etc/nixos/nixpkgs"
+      "/etc/nixos"
       "nixos-config=/etc/nixos/configuration.nix"
     ];
 
-    nixpkgs.overlays = [
-      (import ../packages/overlay.nix)
-    ];
+    nixpkgs.overlays = import ../overlays;
 
     boot.cleanTmpDir = lib.mkDefault true;
 

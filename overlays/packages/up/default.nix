@@ -3,7 +3,7 @@
 }:
 
 let
-  lib = import ../../lib;
+  lib = import <lib>;
 
 in lib.mkScriptDerivation {
   name = "up";
