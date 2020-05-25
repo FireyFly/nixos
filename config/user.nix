@@ -34,8 +34,7 @@ in {
       "networkmanager"
       "dialout"
       "wireshark"
-      "vboxusers"
-    ];
+    ] ++ lib.optional config.virtualisation.virtualbox.host.enable "vboxusers";
 
     mine.directories = let
       _home = config.users.users.firefly.home;
