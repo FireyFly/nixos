@@ -7,12 +7,11 @@
   # modules
   ./modules/user-environment.nix
   ./modules/biboumi.nix
-  ./modules/hikari.nix
   ./modules/secrets.nix
 
   # system config
   ./config/herbstluftwm
-  ./config/hikari
+  ./config/hikari/module.nix
   ./config/input
   ./config/waybar
   ./config/xserver

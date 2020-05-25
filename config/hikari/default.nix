@@ -12,8 +12,8 @@ let
     esac
   '';
 
-in {
-  programs.hikari.settings = config // {
+in pkgs.configurable.hikari {
+  config = config // {
     outputs."*".background = "${pkgs.hikari}/share/backgrounds/hikari/hikari_wallpaper.png";
 
     actions.terminal = "${pkgs.alacritty}/bin/alacritty";
@@ -26,7 +26,7 @@ in {
     actions.music-copy = "${mpc-helper} copy";
   };
 
-  programs.hikari.autostartLines = ''
+  autostartLines = ''
     ${pkgs.waybar}/bin/waybar
   '';
 }
