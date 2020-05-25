@@ -1,0 +1,137 @@
+diff -rN -u old-hikari/Makefile new-hikari/Makefile
+--- old-hikari/Makefile	2020-05-17 19:48:24.673519735 +0200
++++ new-hikari/Makefile	2020-05-17 19:48:24.673519735 +0200
+@@ -66,7 +66,7 @@
+ LDFLAGS += ${LDFLAGS_EXTRA}
+ 
+ .ifdef DEBUG
+-CFLAGS += -g -O0 -fsanitize=address
++CFLAGS += -g -O0 -fsanitize=address -D_FORTIFY_SOURCE=0
+ .else
+ CFLAGS += -DNDEBUG
+ .endif
+diff -rN -u old-hikari/src/indicator_frame.c new-hikari/src/indicator_frame.c
+--- old-hikari/src/indicator_frame.c	2020-05-17 19:48:24.673519735 +0200
++++ new-hikari/src/indicator_frame.c	2020-05-17 19:48:24.673519735 +0200
+@@ -81,33 +81,49 @@
+ hikari_indicator_frame_refresh_geometry(
+     struct hikari_indicator_frame *indicator_frame, struct hikari_view *view)
+ {
+-  struct wlr_box *geometry;
++  struct wlr_box *horizontal_geometry, *vertical_geometry;
++
++  struct hikari_maximized_state *max_state = view->maximized_state;
++  int is_vertically_maximized = max_state != NULL
++      && max_state->maximization == HIKARI_MAXIMIZATION_VERTICALLY_MAXIMIZED;
++  int is_horizontally_maximized = max_state != NULL
++      && max_state->maximization == HIKARI_MAXIMIZATION_HORIZONTALLY_MAXIMIZED;
+ 
+   if (view->border.state == HIKARI_BORDER_NONE) {
+-    geometry = hikari_view_geometry(view);
++    struct wlr_box *geometry = hikari_view_geometry(view);
++    horizontal_geometry = geometry;
++    vertical_geometry = geometry;
++  } else if (is_vertically_maximized) {
++    horizontal_geometry = hikari_view_border_geometry(view);
++    vertical_geometry = hikari_view_geometry(view);
++  } else if (is_horizontally_maximized) {
++    horizontal_geometry = hikari_view_geometry(view);
++    vertical_geometry = hikari_view_border_geometry(view);
+   } else {
+-    geometry = hikari_view_border_geometry(view);
++    struct wlr_box *geometry = hikari_view_border_geometry(view);
++    horizontal_geometry = geometry;
++    vertical_geometry = geometry;
+   }
+ 
+   int border = hikari_configuration->border;
+ 
+-  indicator_frame->top.x = geometry->x;
+-  indicator_frame->top.y = geometry->y;
+-  indicator_frame->top.width = geometry->width;
++  indicator_frame->top.x = horizontal_geometry->x;
++  indicator_frame->top.y = vertical_geometry->y;
++  indicator_frame->top.width = horizontal_geometry->width;
+   indicator_frame->top.height = border;
+ 
+-  indicator_frame->bottom.x = geometry->x;
+-  indicator_frame->bottom.y = geometry->y + geometry->height - border;
+-  indicator_frame->bottom.width = geometry->width;
++  indicator_frame->bottom.x = horizontal_geometry->x;
++  indicator_frame->bottom.y = vertical_geometry->y + vertical_geometry->height - border;
++  indicator_frame->bottom.width = horizontal_geometry->width;
+   indicator_frame->bottom.height = border;
+ 
+-  indicator_frame->left.x = geometry->x;
+-  indicator_frame->left.y = geometry->y;
++  indicator_frame->left.x = horizontal_geometry->x;
++  indicator_frame->left.y = vertical_geometry->y;
+   indicator_frame->left.width = border;
+-  indicator_frame->left.height = geometry->height;
++  indicator_frame->left.height = vertical_geometry->height;
+ 
+-  indicator_frame->right.x = geometry->x + geometry->width - border;
+-  indicator_frame->right.y = geometry->y;
++  indicator_frame->right.x = horizontal_geometry->x + horizontal_geometry->width - border;
++  indicator_frame->right.y = vertical_geometry->y;
+   indicator_frame->right.width = border;
+-  indicator_frame->right.height = geometry->height;
++  indicator_frame->right.height = vertical_geometry->height;
+ }
+diff -rN -u old-hikari/src/keyboard.c new-hikari/src/keyboard.c
+--- old-hikari/src/keyboard.c	2020-05-17 19:48:24.673519735 +0200
++++ new-hikari/src/keyboard.c	2020-05-17 19:48:24.673519735 +0200
+@@ -1,3 +1,6 @@
++#include <errno.h>
++#include <stdio.h>
++#include <string.h>
+ #include <hikari/keyboard.h>
+ 
+ #include <wlr/types/wlr_input_device.h>
+@@ -71,23 +74,34 @@
+ struct xkb_keymap *
+ hikari_load_keymap()
+ {
+-  struct xkb_rule_names rules = { 0 };
++  struct xkb_keymap *keymap;
++  struct xkb_context *context = xkb_context_new(XKB_CONTEXT_NO_FLAGS);
++
++  const char *filename = getenv("XKB_DEFAULT_FILE");
++  FILE *xkb_file = filename != NULL ? fopen(filename, "r") : NULL;
+ 
+-  rules.rules = getenv("XKB_DEFAULT_RULES");
+-  rules.model = getenv("XKB_DEFAULT_MODEL");
+-  rules.layout = getenv("XKB_DEFAULT_LAYOUT");
+-  rules.variant = getenv("XKB_DEFAULT_VARIANT");
+-  rules.options = getenv("XKB_DEFAULT_OPTIONS");
++  if (xkb_file != NULL) {
++    keymap = xkb_keymap_new_from_file(context, xkb_file,
++        XKB_KEYMAP_FORMAT_TEXT_V1, XKB_KEYMAP_COMPILE_NO_FLAGS);
++  } else if (filename != NULL && xkb_file == NULL) {
++    fprintf(stderr, "cannot open xkb file %s: %s\n", filename, strerror(errno));
++  } else {
++    struct xkb_rule_names rules = { 0 };
++
++    rules.rules = getenv("XKB_DEFAULT_RULES");
++    rules.model = getenv("XKB_DEFAULT_MODEL");
++    rules.layout = getenv("XKB_DEFAULT_LAYOUT");
++    rules.variant = getenv("XKB_DEFAULT_VARIANT");
++    rules.options = getenv("XKB_DEFAULT_OPTIONS");
++
++    if (rules.rules == NULL) {
++      rules.rules = hikari_evdev_xkb_default_rules;
++    }
+ 
+-  if (rules.rules == NULL) {
+-    rules.rules = hikari_evdev_xkb_default_rules;
++    keymap = xkb_map_new_from_names(context, &rules, XKB_KEYMAP_COMPILE_NO_FLAGS);
+   }
+ 
+-  struct xkb_context *context = xkb_context_new(XKB_CONTEXT_NO_FLAGS);
+-  struct xkb_keymap *keymap =
+-      xkb_map_new_from_names(context, &rules, XKB_KEYMAP_COMPILE_NO_FLAGS);
+   xkb_context_unref(context);
+-
+   return keymap;
+ }
+ 
