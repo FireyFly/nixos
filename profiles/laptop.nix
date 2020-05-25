@@ -59,7 +59,7 @@ in {
       # development
       nodejs lua gdb python3 clang
       # music
-      mpd mpc_cli mpc-helper ncmpcpp
+      mpd mpc_cli ncmpcpp
       ponymix
     ] ++ when config.services.xserver.enable [
       pangoterm

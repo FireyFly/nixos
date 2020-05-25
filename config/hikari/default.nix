@@ -3,6 +3,15 @@
 let
   config = import ./config.nix;
 
+  mpc-helper = pkgs.writeShellScript "mpc-helper" ''
+    fmt='[%artist% - ][%title%|%file%]'
+    case "$1" in
+      grab) ${pkgs.mpc_cli}/bin/mpc -f "$fmt" current >>$HOME/media/music/grabs ;;
+      copy) ${pkgs.mpc_cli}/bin/mpc -f "$fmt" current | ${pkgs.wl-clipboard}/bin/wl-copy ;;
+      *) echo >&2 "$0: unknown command '$1'"; exit 1 ;;
+    esac
+  '';
+
 in {
   programs.hikari.settings = config // {
     outputs."*".background = "${pkgs.hikari}/share/backgrounds/hikari/hikari_wallpaper.png";
@@ -13,8 +22,8 @@ in {
     actions.music-toggle = "${pkgs.mpc_cli}/bin/mpc toggle";
     actions.music-prev = "${pkgs.mpc_cli}/bin/mpc prev";
     actions.music-next = "${pkgs.mpc_cli}/bin/mpc next";
-    actions.music-grab = "${pkgs.mpc-helper}/bin/mpc-helper grab";
-    actions.music-copy = "${pkgs.mpc-helper}/bin/mpc-helper copy";
+    actions.music-grab = "${mpc-helper} grab";
+    actions.music-copy = "${mpc-helper} copy";
   };
 
   programs.hikari.autostartLines = ''
