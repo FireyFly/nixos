@@ -1,0 +1,380 @@
+include "%L"
+
+# /usr/share/X11/locale/en_US.UTF-8/Compose
+# /usr/include/X11/keysymdef.h
+
+# Dead keys
+<dead_circumflex> <T>              : "⸆" U2E06
+<dead_circumflex> <n>              : "ⁿ" U207F
+<dead_circumflex> <period>         : "⸳" U2E33
+<dead_circumflex> <comma>          : "⸴" U2E34
+<dead_circumflex> <exclam>         : "ꜝ" UA71D
+
+# Emoji etc
+<Multi_key> <3> <3>                : "💕" U1F495
+<Multi_key> <oslash> <oslash>      : "∅" U2205
+<Multi_key> <apostrophe> <apostrophe> : "ʹ" U02B9
+<Multi_key> <bar> <hyphen>         : "⊢" U22A2
+<Multi_key> <equal> <equal>        : "⇔" U21D4
+
+<Multi_key> <n> <b> <s> <p>        : " " U00A0 # NBSP
+<Multi_key> <z> <w> <s> <p>        : "​" U200B # ZWSP
+<Multi_key> <z> <w> <n> <j>        : "‌" U200C # ZWNJ
+<Multi_key> <z> <w> <j>            : "‍" U200D # ZWJ
+<Multi_key> <z> <w> <n> <b>        : "﻿" UFEFF # ZWNBSP
+<Multi_key> <l> <r> <o>            : "‭" U202D # LRO
+<Multi_key> <r> <l> <o>            : "‮" U202E # RLO
+
+<Multi_key> <x> <x>                : "̶" U0336 # COMBINING LONG STROKE OVERLAY
+<Multi_key> <space> n              : " " U2002 # EN SPACE
+<Multi_key> <space> m              : " " U2003 # EM SPACE
+
+<Multi_key> <asterisk> <asterisk>  : "✨" U2728 # SPARKLES
+
+# Diacritics
+<Multi_key> <dead_acute> <dead_acute> : "˝"
+<Multi_key> <dead_acute> <A>       : "A̋"
+<Multi_key> <dead_acute> <a>       : "a̋"
+<Multi_key> <dead_acute> <E>       : "E̋"
+<Multi_key> <dead_acute> <e>       : "e̋"
+<Multi_key> <dead_acute> <I>       : "I̋"
+<Multi_key> <dead_acute> <i>       : "i̋"
+<Multi_key> <dead_acute> <O>       : "Ő"
+<Multi_key> <dead_acute> <o>       : "ő"
+<Multi_key> <dead_acute> <U>       : "Ű"
+<Multi_key> <dead_acute> <u>       : "ű"
+
+# Super- and subscript
+<Multi_key> <underscore> <a>           : "ₐ" U2090
+<Multi_key> <underscore> <e>           : "ₑ" U2091
+<Multi_key> <underscore> <h>           : "ₕ" U2095
+<Multi_key> <underscore> <i>           : "ᵢ" U1D62
+<Multi_key> <underscore> <j>           : "ⱼ" U2C7C
+<Multi_key> <underscore> <k>           : "ₖ" U2096
+<Multi_key> <underscore> <l>           : "ₗ" U2097
+<Multi_key> <underscore> <m>           : "ₘ" U2098
+<Multi_key> <underscore> <n>           : "ₙ" U2099
+<Multi_key> <underscore> <o>           : "ₒ" U2092
+<Multi_key> <underscore> <p>           : "ₚ" U209A
+<Multi_key> <underscore> <r>           : "ᵣ" U1D63
+<Multi_key> <underscore> <s>           : "ₛ" U209B
+<Multi_key> <underscore> <t>           : "ₜ" U209C
+<Multi_key> <underscore> <u>           : "ᵤ" U1D64
+<Multi_key> <underscore> <v>           : "ᵥ" U1D65
+<Multi_key> <underscore> <x>           : "ₓ" U2093
+<Multi_key> <underscore> <Greek_beta>  : "ᵦ" U1D66
+<Multi_key> <underscore> <Greek_gamma> : "ᵧ" U1D67
+<Multi_key> <underscore> <Greek_rho>   : "ᵨ" U1D68
+<Multi_key> <underscore> <Greek_phi>   : "ᵩ" U1D69
+<Multi_key> <underscore> <Greek_chi>   : "ᵪ" U1D6A
+
+# Double-struck symbols
+<Multi_key> <A> <A>                     : "𝔸" U1D538
+<Multi_key> <B> <B>                     : "𝔹" U1D539
+<Multi_key> <C> <C>                     : "ℂ" U2102
+<Multi_key> <D> <D>                     : "𝔻" U1D53B
+<Multi_key> <E> <E>                     : "𝔼" U1D53C
+<Multi_key> <F> <F>                     : "𝔽" U1D53D
+<Multi_key> <G> <G>                     : "𝔾" U1D53E
+<Multi_key> <H> <H>                     : "ℍ" U210D
+<Multi_key> <I> <I>                     : "𝕀" U1D540
+<Multi_key> <J> <J>                     : "𝕁" U1D541
+<Multi_key> <K> <K>                     : "𝕂" U1D542
+<Multi_key> <L> <L>                     : "𝕃" U1D543
+<Multi_key> <M> <M>                     : "𝕄" U1D544
+<Multi_key> <N> <N>                     : "ℕ" U2115
+<Multi_key> <O> <O>                     : "𝕆" U1D546
+<Multi_key> <P> <P>                     : "ℙ" U2119
+<Multi_key> <Q> <Q>                     : "ℚ" U211A
+<Multi_key> <R> <R>                     : "ℝ" U211D
+<Multi_key> <S> <S>                     : "𝕊" U1D54A
+<Multi_key> <T> <T>                     : "𝕋" U1D54B
+<Multi_key> <U> <U>                     : "𝕌" U1D54C
+<Multi_key> <V> <V>                     : "𝕍" U1D54D
+<Multi_key> <W> <W>                     : "𝕎" U1D54E
+<Multi_key> <X> <X>                     : "𝕏" U1D54F
+<Multi_key> <Y> <Y>                     : "𝕐" U1D550
+<Multi_key> <Z> <Z>                     : "ℤ" U2124
+<Multi_key> <Greek_gamma> <Greek_gamma> : "ℾ" U213E
+<Multi_key> <Greek_pi> <Greek_pi>       : "ℿ" U213F
+
+# ASCII control symbols
+<Multi_key> <l> <f>                : "␊" # SYMBOL FOR LINE FEED
+<Multi_key> <c> <r>                : "␍" # SYMBOL FOR CARRIAGE RETURN
+<Multi_key> <s> <p>                : "␠" # SYMBOL FOR SPACE
+<Multi_key> <d> <e> <l>            : "␡" # SYMBOL FOR DELETE
+<Multi_key> <n> <l>                : "␤" # SYMBOL FOR NEWLINE
+
+<Multi_key> <asciicircum> <at>     : "␀" # SYMBOL FOR NULL
+<Multi_key> <asciicircum> <a>      : "␁" # SYMBOL FOR START OF HEADING
+<Multi_key> <asciicircum> <b>      : "␂" # SYMBOL FOR START OF TEXT
+<Multi_key> <asciicircum> <c>      : "␃" # SYMBOL FOR END OF TEXT
+<Multi_key> <asciicircum> <d>      : "␄" # SYMBOL FOR END OF TRANSMISSION
+<Multi_key> <asciicircum> <e>      : "␅" # SYMBOL FOR ENQUIRY
+<Multi_key> <asciicircum> <f>      : "␆" # SYMBOL FOR ACKNOWLEDGE
+<Multi_key> <asciicircum> <g>      : "␇" # SYMBOL FOR BELL
+<Multi_key> <asciicircum> <h>      : "␈" # SYMBOL FOR BACKSPACE
+<Multi_key> <asciicircum> <i>      : "␉" # SYMBOL FOR HORIZONTAL TABULATION
+<Multi_key> <asciicircum> <j>      : "␊" # SYMBOL FOR LINE FEED
+<Multi_key> <asciicircum> <k>      : "␋" # SYMBOL FOR VERTICAL TABULATION
+<Multi_key> <asciicircum> <l>      : "␌" # SYMBOL FOR FORM FEED
+<Multi_key> <asciicircum> <m>      : "␍" # SYMBOL FOR CARRIAGE RETURN
+<Multi_key> <asciicircum> <n>      : "␎" # SYMBOL FOR SHIFT OUT
+<Multi_key> <asciicircum> <o>      : "␏" # SYMBOL FOR SHIFT IN
+<Multi_key> <asciicircum> <p>      : "␐" # SYMBOL FOR DATA LINK ESCAPE
+<Multi_key> <asciicircum> <q>      : "␑" # SYMBOL FOR DEVICE CONTROL ONE
+<Multi_key> <asciicircum> <r>      : "␒" # SYMBOL FOR DEVICE CONTROL TWO
+<Multi_key> <asciicircum> <s>      : "␓" # SYMBOL FOR DEVICE CONTROL THREE
+<Multi_key> <asciicircum> <t>      : "␔" # SYMBOL FOR DEVICE CONTROL FOUR
+<Multi_key> <asciicircum> <u>      : "␕" # SYMBOL FOR NEGATIVE ACKNOWLEDGE
+<Multi_key> <asciicircum> <v>      : "␖" # SYMBOL FOR SYNCHRONOUS IDLE
+<Multi_key> <asciicircum> <w>      : "␗" # SYMBOL FOR END OF TRANSMISSION BLOCK
+<Multi_key> <asciicircum> <x>      : "␘" # SYMBOL FOR CANCEL
+<Multi_key> <asciicircum> <y>      : "␙" # SYMBOL FOR END OF MEDIUM
+<Multi_key> <asciicircum> <z>      : "␚" # SYMBOL FOR SUBSTITUTE
+<Multi_key> <asciicircum> <bracketleft>  : "␛" # SYMBOL FOR ESCAPE
+<Multi_key> <asciicircum> <backslash>    : "␜" # SYMBOL FOR FILE SEPARATOR
+<Multi_key> <asciicircum> <bracketright> : "␝" # SYMBOL FOR GROUP SEPARATOR
+<Multi_key> <asciicircum> <asciicircum>  : "␞" # SYMBOL FOR RECORD SEPARATOR
+<Multi_key> <asciicircum> <underscore>   : "␟" # SYMBOL FOR UNIT SEPARATOR
+
+# Kana etc
+<Multi_key> <bracketleft> <apostrophe>   : "「"
+<Multi_key> <bracketright> <apostrophe>  : "」"
+<Multi_key> <bracketleft> <quotedbl>     : "『"
+<Multi_key> <bracketright> <quotedbl>    : "』"
+<Multi_key> <hyphen> <question>    : "〜"  # -? 〜 12316
+<Multi_key> <A> <5>                : "ぁ"  # A5 ぁ 12353
+<Multi_key> <a> <5>                : "あ"  # a5 あ 12354
+<Multi_key> <I> <5>                : "ぃ"  # I5 ぃ 12355
+<Multi_key> <i> <5>                : "い"  # i5 い 12356
+<Multi_key> <U> <5>                : "ぅ"  # U5 ぅ 12357
+<Multi_key> <u> <5>                : "う"  # u5 う 12358
+<Multi_key> <E> <5>                : "ぇ"  # E5 ぇ 12359
+<Multi_key> <e> <5>                : "え"  # e5 え 12360
+<Multi_key> <O> <5>                : "ぉ"  # O5 ぉ 12361
+<Multi_key> <o> <5>                : "お"  # o5 お 12362
+<Multi_key> <k> <a>                : "か"  # ka か 12363
+<Multi_key> <g> <a>                : "が"  # ga が 12364
+<Multi_key> <k> <i>                : "き"  # ki き 12365
+<Multi_key> <g> <i>                : "ぎ"  # gi ぎ 12366
+<Multi_key> <k> <u>                : "く"  # ku く 12367
+<Multi_key> <g> <u>                : "ぐ"  # gu ぐ 12368
+<Multi_key> <k> <e>                : "け"  # ke け 12369
+<Multi_key> <g> <e>                : "げ"  # ge げ 12370
+<Multi_key> <k> <o>                : "こ"  # ko こ 12371
+<Multi_key> <g> <o>                : "ご"  # go ご 12372
+<Multi_key> <s> <a>                : "さ"  # sa さ 12373
+<Multi_key> <z> <a>                : "ざ"  # za ざ 12374
+<Multi_key> <s> <i>                : "し"  # si し 12375
+<Multi_key> <z> <i>                : "じ"  # zi じ 12376
+<Multi_key> <s> <u>                : "す"  # su す 12377
+<Multi_key> <z> <u>                : "ず"  # zu ず 12378
+<Multi_key> <s> <e>                : "せ"  # se せ 12379
+<Multi_key> <z> <e>                : "ぜ"  # ze ぜ 12380
+<Multi_key> <s> <o>                : "そ"  # so そ 12381
+<Multi_key> <z> <o>                : "ぞ"  # zo ぞ 12382
+<Multi_key> <t> <a>                : "た"  # ta た 12383
+<Multi_key> <d> <a>                : "だ"  # da だ 12384
+<Multi_key> <t> <i>                : "ち"  # ti ち 12385
+<Multi_key> <d> <i>                : "ぢ"  # di ぢ 12386
+<Multi_key> <t> <U>                : "っ"  # tU っ 12387
+<Multi_key> <t> <u>                : "つ"  # tu つ 12388
+<Multi_key> <d> <u>                : "づ"  # du づ 12389
+<Multi_key> <t> <e>                : "て"  # te て 12390
+<Multi_key> <d> <e>                : "で"  # de で 12391
+<Multi_key> <t> <o>                : "と"  # to と 12392
+<Multi_key> <d> <o>                : "ど"  # do ど 12393
+<Multi_key> <n> <a>                : "な"  # na な 12394
+<Multi_key> <n> <i>                : "に"  # ni に 12395
+<Multi_key> <n> <u>                : "ぬ"  # nu ぬ 12396
+<Multi_key> <n> <e>                : "ね"  # ne ね 12397
+<Multi_key> <n> <o>                : "の"  # no の 12398
+<Multi_key> <h> <a>                : "は"  # ha は 12399
+<Multi_key> <b> <a>                : "ば"  # ba ば 12400
+<Multi_key> <p> <a>                : "ぱ"  # pa ぱ 12401
+<Multi_key> <h> <i>                : "ひ"  # hi ひ 12402
+<Multi_key> <b> <i>                : "び"  # bi び 12403
+<Multi_key> <p> <i>                : "ぴ"  # pi ぴ 12404
+<Multi_key> <h> <u>                : "ふ"  # hu ふ 12405
+<Multi_key> <b> <u>                : "ぶ"  # bu ぶ 12406
+<Multi_key> <p> <u>                : "ぷ"  # pu ぷ 12407
+<Multi_key> <h> <e>                : "へ"  # he へ 12408
+<Multi_key> <b> <e>                : "べ"  # be べ 12409
+<Multi_key> <p> <e>                : "ぺ"  # pe ぺ 12410
+<Multi_key> <h> <o>                : "ほ"  # ho ほ 12411
+<Multi_key> <b> <o>                : "ぼ"  # bo ぼ 12412
+<Multi_key> <p> <o>                : "ぽ"  # po ぽ 12413
+<Multi_key> <m> <a>                : "ま"  # ma ま 12414
+<Multi_key> <m> <i>                : "み"  # mi み 12415
+<Multi_key> <m> <u>                : "む"  # mu む 12416
+<Multi_key> <m> <e>                : "め"  # me め 12417
+<Multi_key> <m> <o>                : "も"  # mo も 12418
+<Multi_key> <y> <A>                : "ゃ"  # yA ゃ 12419
+<Multi_key> <y> <a>                : "や"  # ya や 12420
+<Multi_key> <y> <U>                : "ゅ"  # yU ゅ 12421
+<Multi_key> <y> <u>                : "ゆ"  # yu ゆ 12422
+<Multi_key> <y> <O>                : "ょ"  # yO ょ 12423
+<Multi_key> <y> <o>                : "よ"  # yo よ 12424
+<Multi_key> <r> <a>                : "ら"  # ra ら 12425
+<Multi_key> <r> <i>                : "り"  # ri り 12426
+<Multi_key> <r> <u>                : "る"  # ru る 12427
+<Multi_key> <r> <e>                : "れ"  # re れ 12428
+<Multi_key> <r> <o>                : "ろ"  # ro ろ 12429
+<Multi_key> <w> <A>                : "ゎ"  # wA ゎ 12430
+<Multi_key> <w> <a>                : "わ"  # wa わ 12431
+<Multi_key> <w> <i>                : "ゐ"  # wi ゐ 12432
+<Multi_key> <w> <e>                : "ゑ"  # we ゑ 12433
+<Multi_key> <w> <o>                : "を"  # wo を 12434
+<Multi_key> <n> <5>                : "ん"  # n5 ん 12435
+<Multi_key> <v> <u>                : "ゔ"  # vu ゔ 12436
+<Multi_key> <quotedbl <5>          : "゛"  # "5 ゛ 12443
+<Multi_key> <0> <5>                : "゜"  # 05 ゜ 12444
+<Multi_key> <asterisk> <5>         : "ゝ"  # *5 ゝ 12445
+<Multi_key> <plus> <5>             : "ゞ"  # +5 ゞ 12446
+<Multi_key> <a> <6>                : "ァ"  # a6 ァ 12449
+<Multi_key> <A> <6>                : "ア"  # A6 ア 12450
+<Multi_key> <i> <6>                : "ィ"  # i6 ィ 12451
+<Multi_key> <I> <6>                : "イ"  # I6 イ 12452
+<Multi_key> <u> <6>                : "ゥ"  # u6 ゥ 12453
+<Multi_key> <U> <6>                : "ウ"  # U6 ウ 12454
+<Multi_key> <e> <6>                : "ェ"  # e6 ェ 12455
+<Multi_key> <E> <6>                : "エ"  # E6 エ 12456
+<Multi_key> <o> <6>                : "ォ"  # o6 ォ 12457
+<Multi_key> <O> <6>                : "オ"  # O6 オ 12458
+<Multi_key> <K> <a>                : "カ"  # Ka カ 12459
+<Multi_key> <G> <a>                : "ガ"  # Ga ガ 12460
+<Multi_key> <K> <i>                : "キ"  # Ki キ 12461
+<Multi_key> <G> <i>                : "ギ"  # Gi ギ 12462
+<Multi_key> <K> <u>                : "ク"  # Ku ク 12463
+<Multi_key> <G> <u>                : "グ"  # Gu グ 12464
+<Multi_key> <K> <e>                : "ケ"  # Ke ケ 12465
+<Multi_key> <G> <e>                : "ゲ"  # Ge ゲ 12466
+<Multi_key> <K> <o>                : "コ"  # Ko コ 12467
+<Multi_key> <G> <o>                : "ゴ"  # Go ゴ 12468
+<Multi_key> <S> <a>                : "サ"  # Sa サ 12469
+<Multi_key> <Z> <a>                : "ザ"  # Za ザ 12470
+<Multi_key> <S> <i>                : "シ"  # Si シ 12471
+<Multi_key> <Z> <i>                : "ジ"  # Zi ジ 12472
+<Multi_key> <S> <u>                : "ス"  # Su ス 12473
+<Multi_key> <Z> <u>                : "ズ"  # Zu ズ 12474
+<Multi_key> <S> <e>                : "セ"  # Se セ 12475
+<Multi_key> <Z> <e>                : "ゼ"  # Ze ゼ 12476
+<Multi_key> <S> <o>                : "ソ"  # So ソ 12477
+<Multi_key> <Z> <o>                : "ゾ"  # Zo ゾ 12478
+<Multi_key> <T> <a>                : "タ"  # Ta タ 12479
+<Multi_key> <D> <a>                : "ダ"  # Da ダ 12480
+<Multi_key> <T> <i>                : "チ"  # Ti チ 12481
+<Multi_key> <D> <i>                : "ヂ"  # Di ヂ 12482
+<Multi_key> <T> <U>                : "ッ"  # TU ッ 12483
+<Multi_key> <T> <u>                : "ツ"  # Tu ツ 12484
+<Multi_key> <D> <u>                : "ヅ"  # Du ヅ 12485
+<Multi_key> <T> <e>                : "テ"  # Te テ 12486
+<Multi_key> <D> <e>                : "デ"  # De デ 12487
+<Multi_key> <T> <o>                : "ト"  # To ト 12488
+<Multi_key> <D> <o>                : "ド"  # Do ド 12489
+<Multi_key> <N> <a>                : "ナ"  # Na ナ 12490
+<Multi_key> <N> <i>                : "ニ"  # Ni ニ 12491
+<Multi_key> <N> <u>                : "ヌ"  # Nu ヌ 12492
+<Multi_key> <N> <e>                : "ネ"  # Ne ネ 12493
+<Multi_key> <N> <o>                : "ノ"  # No ノ 12494
+<Multi_key> <H> <a>                : "ハ"  # Ha ハ 12495
+<Multi_key> <B> <a>                : "バ"  # Ba バ 12496
+<Multi_key> <P> <a>                : "パ"  # Pa パ 12497
+<Multi_key> <H> <i>                : "ヒ"  # Hi ヒ 12498
+<Multi_key> <B> <i>                : "ビ"  # Bi ビ 12499
+<Multi_key> <P> <i>                : "ピ"  # Pi ピ 12500
+<Multi_key> <H> <u>                : "フ"  # Hu フ 12501
+<Multi_key> <B> <u>                : "ブ"  # Bu ブ 12502
+<Multi_key> <P> <u>                : "プ"  # Pu プ 12503
+<Multi_key> <H> <e>                : "ヘ"  # He ヘ 12504
+<Multi_key> <B> <e>                : "ベ"  # Be ベ 12505
+<Multi_key> <P> <e>                : "ペ"  # Pe ペ 12506
+<Multi_key> <H> <o>                : "ホ"  # Ho ホ 12507
+<Multi_key> <B> <o>                : "ボ"  # Bo ボ 12508
+<Multi_key> <P> <o>                : "ポ"  # Po ポ 12509
+<Multi_key> <M> <a>                : "マ"  # Ma マ 12510
+<Multi_key> <M> <i>                : "ミ"  # Mi ミ 12511
+<Multi_key> <M> <u>                : "ム"  # Mu ム 12512
+<Multi_key> <M> <e>                : "メ"  # Me メ 12513
+<Multi_key> <M> <o>                : "モ"  # Mo モ 12514
+<Multi_key> <Y> <A>                : "ャ"  # YA ャ 12515
+<Multi_key> <Y> <a>                : "ヤ"  # Ya ヤ 12516
+<Multi_key> <Y> <U>                : "ュ"  # YU ュ 12517
+<Multi_key> <Y> <u>                : "ユ"  # Yu ユ 12518
+<Multi_key> <Y> <O>                : "ョ"  # YO ョ 12519
+<Multi_key> <Y> <o>                : "ヨ"  # Yo ヨ 12520
+<Multi_key> <R> <a>                : "ラ"  # Ra ラ 12521
+<Multi_key> <R> <i>                : "リ"  # Ri リ 12522
+<Multi_key> <R> <u>                : "ル"  # Ru ル 12523
+<Multi_key> <R> <e>                : "レ"  # Re レ 12524
+<Multi_key> <R> <o>                : "ロ"  # Ro ロ 12525
+<Multi_key> <W> <A>                : "ヮ"  # WA ヮ 12526
+<Multi_key> <W> <a>                : "ワ"  # Wa ワ 12527
+<Multi_key> <W> <i>                : "ヰ"  # Wi ヰ 12528
+<Multi_key> <W> <e>                : "ヱ"  # We ヱ 12529
+<Multi_key> <W> <o>                : "ヲ"  # Wo ヲ 12530
+<Multi_key> <N> <6>                : "ン"  # N6 ン 12531
+<Multi_key> <V> <u>                : "ヴ"  # Vu ヴ 12532
+<Multi_key> <K> <A>                : "ヵ"  # KA ヵ 12533
+<Multi_key> <K> <E>                : "ヶ"  # KE ヶ 12534
+<Multi_key> <V> <a>                : "ヷ"  # Va ヷ 12535
+<Multi_key> <V> <i>                : "ヸ"  # Vi ヸ 12536
+<Multi_key> <V> <e>                : "ヹ"  # Ve ヹ 12537
+<Multi_key> <V> <o>                : "ヺ"  # Vo ヺ 12538
+<Multi_key> <period> <6>           : "・"  # .6 ・ 12539
+<Multi_key> <hyphen> <6>           : "ー"  # -6 ー 12540
+<Multi_key> <tilde> <tilde>        : "ー"  # ~~ ー 12540
+<Multi_key> <asterisk> <6>         : "ヽ"  # *6 ヽ 12541
+
+# Block & box-drawing characters
+<Multi_key> <h> <h>                : "─"  U2500
+<Multi_key> <v> <v>                : "│"  U2502
+<Multi_key> <d> <r>                : "┌"  U250C
+<Multi_key> <d> <l>                : "┐"  U2510
+<Multi_key> <u> <r>                : "└"  U2514
+<Multi_key> <u> <l>                : "┘"  U2518
+<Multi_key> <v> <r>                : "├"  U251C
+<Multi_key> <v> <l>                : "┤"  U2524
+<Multi_key> <d> <h>                : "┬"  U252C
+<Multi_key> <u> <h>                : "┴"  U2534
+<Multi_key> <v> <h>                : "┼"  U253C
+<Multi_key> <H> <H>                : "═"  U2550
+<Multi_key> <V> <V>                : "║"  U2551
+<Multi_key> <d> <R>                : "╒"  U2552
+<Multi_key> <D> <r>                : "╓"  U2553
+<Multi_key> <D> <R>                : "╔"  U2554
+<Multi_key> <d> <L>                : "╕"  U2555
+<Multi_key> <D> <l>                : "╖"  U2556
+<Multi_key> <D> <L>                : "╗"  U2557
+<Multi_key> <u> <R>                : "╘"  U2558
+<Multi_key> <U> <r>                : "╙"  U2559
+<Multi_key> <U> <R>                : "╚"  U255A
+<Multi_key> <u> <L>                : "╛"  U255B
+<Multi_key> <U> <l>                : "╜"  U255C
+<Multi_key> <U> <L>                : "╝"  U255D
+<Multi_key> <v> <R>                : "╞"  U255E
+<Multi_key> <V> <r>                : "╟"  U255F
+<Multi_key> <V> <R>                : "╠"  U2560
+<Multi_key> <v> <L>                : "╡"  U2561
+<Multi_key> <V> <l>                : "╢"  U2562
+<Multi_key> <V> <L>                : "╣"  U2563
+<Multi_key> <d> <H>                : "╤"  U2564
+<Multi_key> <D> <h>                : "╥"  U2565
+<Multi_key> <D> <H>                : "╦"  U2566
+<Multi_key> <u> <H>                : "╧"  U2567
+<Multi_key> <U> <h>                : "╨"  U2568
+<Multi_key> <U> <H>                : "╩"  U2569
+<Multi_key> <v> <H>                : "╪"  U256A
+<Multi_key> <V> <h>                : "╫"  U256B
+<Multi_key> <V> <H>                : "╬"  U256C
+
+<Multi_key> <T> <B>                : "▀"  U2580
+<Multi_key> <1> <B>                : "▁"  U2581
+<Multi_key> <2> <B>                : "▂"  U2582
+<Multi_key> <3> <B>                : "▃"  U2583
+<Multi_key> <L> <B>                : "▄"  U2584
+<Multi_key> <5> <B>                : "▅"  U2585
+<Multi_key> <6> <B>                : "▆"  U2586
+<Multi_key> <7> <B>                : "▇"  U2587
+<Multi_key> <F> <B>                : "█"  U2588

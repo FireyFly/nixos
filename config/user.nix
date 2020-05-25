@@ -59,9 +59,6 @@ in {
       XDG_DATA_HOME = _var;
       XDG_CACHE_HOME = _cache;
 
-      XCOMPOSEFILE = "${_config}/X11/XCompose";
-      XCOMPOSECACHE = "${_cache}/X11/compose";
-
       # this is slightly hacky since vim won't actually know this to be the
       # vimrc.  Doesn't set $MYVIMRC
       VIMINIT = "source ${_config}/vim/vimrc";
