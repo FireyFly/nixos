@@ -4,9 +4,19 @@ let
   filterNonNull = builtins.filter (x: x != null);
   ifX11 = x: if config.services.xserver.enable then x else null;
 
+  inherit (lib) types;
+
+  mkDirectoryOption = name: lib.mkOption {
+    type = types.str;
+    description = "${name} directory";
+  };
+
 in {
   options = {
     mine.enableUser = lib.mkEnableOption "firefly user";
+    mine.directories.config = mkDirectoryOption "XDG config";
+    mine.directories.data = mkDirectoryOption "XDG data";
+    mine.directories.cache = mkDirectoryOption "XDG cache";
   };
 
   config = lib.mkIf config.mine.enableUser {
@@ -27,11 +37,19 @@ in {
       "vboxusers"
     ];
 
+    mine.directories = let
+      _home = config.users.users.firefly.home;
+    in {
+      config = "${_home}/local/config";
+      data = "${_home}/local/var";
+      cache = "${_home}/local/var/cache";
+    };
+
     mine.users.users.firefly.environment = let
       _home = config.users.users.firefly.home;
-      _config = "${_home}/local/config";
-      _var = "${_home}/local/var";
-      _cache = "${_home}/local/var/cache";
+      _config = config.mine.directories.config;
+      _var = config.mine.directories.data;
+      _cache = config.mine.directories.cache;
     in {
       EDITOR = "vim";
 
