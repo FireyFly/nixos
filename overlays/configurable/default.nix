@@ -4,6 +4,7 @@ self: super: {
   configurable = {
 
     hikari = opts: super.callPackage ./hikari.nix opts;
+    waybar = opts: super.callPackage ./waybar.nix opts;
 
   };
 }

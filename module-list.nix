@@ -13,7 +13,6 @@
   ./config/herbstluftwm
   ./config/hikari/module.nix
   ./config/input
-  ./config/waybar
   ./config/xserver
   ./config/user.nix
 ]

@@ -1,9 +1,6 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
-let
+pkgs.configurable.waybar {
   config = import ./config.nix;
-
-in {
-  environment.etc."xdg/waybar/config".text = lib.generators.toJSON {} config;
-  environment.etc."xdg/waybar/style.css".source = ./style.css;
+  stylesheetFile = ./style.css;
 }

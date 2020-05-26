@@ -3,6 +3,8 @@
 let
   config = import ./config.nix;
 
+  waybar = import ../waybar { inherit pkgs; };
+
   mpc-helper = pkgs.writeShellScript "mpc-helper" ''
     fmt='[%artist% - ][%title%|%file%]'
     case "$1" in
@@ -27,6 +29,6 @@ in pkgs.configurable.hikari {
   };
 
   autostartLines = ''
-    ${pkgs.waybar}/bin/waybar
+    ${waybar}/bin/waybar
   '';
 }
