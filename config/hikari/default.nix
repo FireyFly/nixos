@@ -3,6 +3,7 @@
 let
   config = import ./config.nix;
 
+  alacritty = import ../alacritty { inherit pkgs; };
   waybar = import ../waybar { inherit pkgs; };
 
   mpc-helper = pkgs.writeShellScript "mpc-helper" ''
@@ -16,9 +17,10 @@ let
 
 in pkgs.configurable.hikari {
   config = config // {
+    # NB reference to upstream hikari
     outputs."*".background = "${pkgs.hikari}/share/backgrounds/hikari/hikari_wallpaper.png";
 
-    actions.terminal = "${pkgs.alacritty}/bin/alacritty";
+    actions.terminal = "${alacritty}/bin/alacritty";
 
     # mpc control
     actions.music-toggle = "${pkgs.mpc_cli}/bin/mpc toggle";
