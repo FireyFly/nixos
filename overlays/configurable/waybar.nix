@@ -2,6 +2,7 @@
 , copyPathToStore, writeText, writeShellScriptBin, symlinkJoin, linkFarm
 # dependencies
 , waybar
+, package ? waybar
 # options
   # structured waybar config
 , config ? {}
@@ -19,14 +20,14 @@
       "waybar/style.css" = copyPathToStore stylesheetFile;
     };
 
-    binWaybarWrapper = writeShellScriptBin "waybar" ''
+    binWrapper = writeShellScriptBin "waybar" ''
       set -e
       export XDG_CONFIG_HOME=${xdgConfigHome}
-      exec ${waybar}/bin/waybar
+      exec ${package}/bin/waybar
     '';
 
   in symlinkJoin {
-    name = "waybar-configured";
-    paths = [ binWaybarWrapper waybar ];
+    name = "waybar-customized";
+    paths = [ binWrapper package ];
   }
 

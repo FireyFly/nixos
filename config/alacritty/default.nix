@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-pkgs.configurable.alacritty {
+pkgs.alacritty.customize {
   config = {
     window.padding = { x = 2; y = 2; };
     window.decorations = "none";

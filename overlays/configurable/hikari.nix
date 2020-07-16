@@ -2,6 +2,7 @@
 , writeText, writeShellScript, writeShellScriptBin, symlinkJoin
 # dependencies
 , hikari, dbus
+, package ? hikari
 # options
   # structured hikari config
 , config ? {}
@@ -16,8 +17,8 @@
     configFile = writeText "hikari.conf" (lib.generators.toJSON {} config);
     autostartFile = writeShellScript "hikari-autostart" autostartLines;
 
-    command = ''${hikari}/bin/hikari -a ${autostartFile} -c ${configFile} "$@"'';
-    binHikariWrapper = writeShellScriptBin "hikari" ''
+    command = ''${package}/bin/hikari -a ${autostartFile} -c ${configFile} "$@"'';
+    binWrapper = writeShellScriptBin "hikari" ''
       set -e
       ${sessionCommands}
       if [ "$DBUS_SESSION_BUS_ADDRESS" ]; then
@@ -29,6 +30,6 @@
     '';
 
   in symlinkJoin {
-    name = "hikari-configured";
-    paths = [ binHikariWrapper hikari ];
+    name = "hikari-customized";
+    paths = [ binWrapper package ];
   }

@@ -1,12 +1,25 @@
 
-self: super: {
-  # assume there's no 'configurable' in nixpkgs top-level
-  configurable = {
+let
+  makeCustomizeWrapper = pkgs: wrapperDerivation:
+    let
+      # add '.customize' function to package, modelled somewhat after nixpkgs
+      # vim-plugins/vim-utils.nix
+      makeCustomizable = package: package // {
+        customize = opts:
+          pkgs.callPackage wrapperDerivation (opts // { inherit package; });
 
-    alacritty = opts: super.callPackage ./alacritty.nix opts;
-    hikari = opts: super.callPackage ./hikari.nix opts;
-    waybar = opts: super.callPackage ./waybar.nix opts;
+        override = f: makeCustomizable (package.override f);
+        overrideAttrs = f: makeCustomizable (package.overrideAttrs f);
+      };
+    in makeCustomizable;
+in
 
-  };
+self: super: let
+  makeCustomizeWrapper' = makeCustomizeWrapper super;
+in {
+  alacritty = makeCustomizeWrapper' ./alacritty.nix super.alacritty;
+  hikari = makeCustomizeWrapper' ./hikari.nix super.hikari;
+  mpd = makeCustomizeWrapper' ./mpd.nix super.mpd;
+  waybar = makeCustomizeWrapper' ./waybar.nix super.waybar;
 }
 

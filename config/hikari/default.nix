@@ -15,7 +15,7 @@ let
     esac
   '';
 
-in pkgs.configurable.hikari {
+in pkgs.hikari.customize {
   config = config // {
     # NB reference to upstream hikari
     outputs."*".background = "${pkgs.hikari}/share/backgrounds/hikari/hikari_wallpaper.png";

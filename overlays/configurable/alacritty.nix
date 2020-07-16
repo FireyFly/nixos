@@ -2,6 +2,7 @@
 , writeText, writeShellScriptBin, symlinkJoin
 # dependencies
 , alacritty
+, package ? alacritty
 # options
   # structured alacritty config
 , config ? {}
@@ -10,11 +11,11 @@
     configFile = writeText "alacritty.yml" (lib.generators.toYAML {} config);
     binWrapper = writeShellScriptBin "alacritty" ''
       set -e
-      exec ${alacritty}/bin/alacritty --config-file ${configFile}
+      exec ${package}/bin/alacritty --config-file ${configFile}
     '';
 
   in symlinkJoin {
-    name = "alacritty-configured";
-    paths = [ binWrapper alacritty ];
+    name = "alacritty-customized";
+    paths = [ binWrapper package ];
   }
 

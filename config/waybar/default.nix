@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-pkgs.configurable.waybar {
+pkgs.waybar.customize {
   config = import ./config.nix;
   stylesheetFile = ./style.css;
 }
