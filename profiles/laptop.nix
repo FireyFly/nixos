@@ -34,12 +34,15 @@ in {
     programs.ssh.startAgent = true;
     programs.wireshark.enable = true;
 
+    programs.gnupg.agent.enable = true;
+    programs.gnupg.agent.pinentryFlavor = "gnome3";
+
     environment.systemPackages = with pkgs; let
       when = cond: arr: if cond then arr else [];
     in [
       # cli tools
       scrup
-      gnupg
+    # gnupg
       openssl
       sshfs-fuse
       youtube-dl

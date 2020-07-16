@@ -70,7 +70,7 @@ in {
       ZDOTDIR = "${_config}/zsh";
       MBLAZE = "${_var}/mblaze";
       LESSHISTFILE = "${_var}/less/history";
-      GNUPGHOME = "${_var}/gnupg";
+    # GNUPGHOME = "${_var}/gnupg";
       WEECHAT_HOME = "${_var}/weechat";
 
       PULSE_COOKIE = "${_var}/pulse/cookie";
