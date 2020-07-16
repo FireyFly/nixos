@@ -12,6 +12,8 @@ let
       type = lib.types.bool;
     };
 
+  fireflyUserEnv = import ../user-env { inherit config pkgs; };
+
 in {
   options = {
     mine.profiles.common.enable = mkEnableOption' "common profile";
@@ -66,36 +68,7 @@ in {
 
     programs.ssh.askPassword = "";
     programs.mtr.enable = true;
-    environment.systemPackages = with pkgs; [
-      manpages
-      # standard tools
-      bc file htop psmisc tree
-      # utilities
-      plaintext charselect
-      (up.override {
-        clipboardCommand =
-          if config.services.xserver.enable
-          then "${xclip}/bin/xcilp -selection clipboard -i"
-          else if config.programs.hikari.enable
-          then "${wl-clipboard}/bin/wl-copy"
-          else "cat";
-      })
-      # network
-      bind finger_bsd lftp whois
-      mosh wget
-      # compression
-      unzip zip
-      #p7zip   # 2020-04-30: marked insecure (CVEs)
-      #unrar   # nonfree
-      # reveng etc
-      hexd pixd colordiff vbindiff
-      # useful tools
-      w3m jq ripgrep xmlformat
-      #mandoc
-      j
-      vim_configurable
-      git # or git-minimal?
-    ];
+    environment.systemPackages = [ fireflyUserEnv ];
 
     #-- users ---------------------------
     mine.enableUser = true;
