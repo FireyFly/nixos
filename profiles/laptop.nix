@@ -53,7 +53,9 @@ in {
       # development
       nodejs lua gdb python3 clang
       # music
-      mpd mpc_cli ncmpcpp
+    # mpd
+      (import ../config/mpd { inherit pkgs; })
+      mpc_cli ncmpcpp
       ponymix
     ] ++ when config.services.xserver.enable [
       pangoterm
