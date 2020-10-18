@@ -15,10 +15,20 @@ let
     esac
   '';
 
+  wallpaper = let
+    file = pkgs.fetchurl {
+      url = "https://cdnb.artstation.com/p/assets/images/images/002/223/417/large/minority-4-c.jpg";
+      sha256 = "093bfinr7d2r9wr7vdfq9wjmkmzla5ycxr61gxw441l5kvbnppah";
+    };
+  in pkgs.runCommandNoCC "wallpaper-minority.png" {} ''
+    ${pkgs.imagemagick}/bin/convert ${file} $out
+  '';
+
+
 in pkgs.hikari.customize {
   config = config // {
-    # NB reference to upstream hikari
-    outputs."*".background = "${pkgs.hikari}/share/backgrounds/hikari/hikari_wallpaper.png";
+    outputs."*".background.fit = "center";
+    outputs."*".background.path = wallpaper;
 
     actions.terminal = "${alacritty}/bin/alacritty";
 
