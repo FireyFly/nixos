@@ -39,6 +39,8 @@ in {
 
     environment.systemPackages = with pkgs; let
       when = cond: arr: if cond then arr else [];
+      hasX11 = config.services.xserver.enable;
+      hasWayland = config.programs.hikari.enable;
     in [
       # cli tools
       scrup
@@ -56,25 +58,23 @@ in {
       # development
       nodejs lua gdb python3 clang
       # music
-    # mpd
       (import ../config/mpd { inherit pkgs; })
       mpc_cli ncmpcpp
       ponymix
-    ] ++ when config.services.xserver.enable [
       # other applications
       dino
+    ] ++ when hasX11 [
       pangoterm
-      firefox
       feh
       scrot
       xclip
-      pass
-    ] ++ when config.programs.hikari.enable [
+    ] ++ when hasWayland [
       alacritty
-      firefox-wayland
       wl-clipboard
       imv
       grim
+    ] ++ when (hasX11 or hasWayland) [
+      firefox-wayland
       pass-wayland
     ];
 
