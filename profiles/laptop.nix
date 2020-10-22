@@ -49,7 +49,6 @@ in {
       sshfs-fuse
       youtube-dl
       # gui tools
-      katarakt
       mpv
       wireshark-cli
       # hardware
@@ -65,11 +64,12 @@ in {
       dino
     ] ++ when hasX11 [
       pangoterm
+      katarakt
       feh
       scrot
       xclip
     ] ++ when hasWayland [
-      alacritty
+      (import ../config/alacritty { inherit pkgs; })
       wl-clipboard
       imv
       grim
