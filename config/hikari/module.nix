@@ -10,7 +10,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ package ];
+    environment.systemPackages = [ package pkgs.xwayland ];
     security.pam.services.hikari-unlocker = {};
   # security.pam.services.hikari-unlocker.text = "auth include login";
   # security.wrappers.hikari-unlocker.source = "${pkgs.hikari}/bin/hikari-unlocker";
