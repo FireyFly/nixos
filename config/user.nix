@@ -60,10 +60,6 @@ in {
       XDG_DATA_HOME = _var;
       XDG_CACHE_HOME = _cache;
 
-      # this is slightly hacky since vim won't actually know this to be the
-      # vimrc.  Doesn't set $MYVIMRC
-      VIMINIT = "source ${_config}/vim/vimrc";
-
       # NB. read in profiles/laptop.nix
       MPD_CONF = "${_config}/mpd/mpd.conf";
 
