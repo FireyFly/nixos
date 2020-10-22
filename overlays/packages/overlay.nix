@@ -8,6 +8,7 @@ rec {
 
   katarakt = super.libsForQt5.callPackage ./katarakt {};
 
+  lywsd03mmc-exporter = super.callPackage ./lywsd03mmc-exporter {};
 
   pangoterm = super.callPackage ./pangoterm {};
   jevalbot = super.callPackage ./jevalbot {};
