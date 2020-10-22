@@ -61,6 +61,8 @@ in {
       mpc_cli ncmpcpp
       ponymix
     ] ++ when config.services.xserver.enable [
+      # other applications
+      dino
       pangoterm
       firefox
       feh

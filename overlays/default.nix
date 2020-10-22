@@ -2,6 +2,7 @@
 [
   (import ./packages/overlay.nix)
   (import ./pins.nix)
+  (import ./patches/overlay.nix)
 
   (self: super: {
     waybar = super.waybar.override {
