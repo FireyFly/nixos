@@ -6,12 +6,12 @@
   imports = import ../../module-list.nix;
 
   nix.maxJobs = 4;
-  nixpkgs.config.allowUnfreePredicate =
-    x: lib.hasPrefix "ttf-envy-code-r" x.name;
+  nixpkgs.config.allowUnfree = true;
 
   networking.hostName = "as";
 
   mine.profiles.laptop.enable = true;
+  mine.profiles.gaming.enable = true;
   mine.services.xserver.emitMediaKeyEvents = true;
 
   boot = {
