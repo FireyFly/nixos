@@ -60,6 +60,12 @@ in {
       '';
     };
 
+    networking.networkmanager.dns = "dnsmasq";
+    services.dnsmasq = {
+      enable = true;
+      servers = [ "1.1.1.1" "8.8.4.4" ];
+    };
+
     #-- programs ------------------------
     programs.zsh.enable = true;
     programs.zsh.shellInit = ''
