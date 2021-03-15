@@ -10,6 +10,8 @@ pkgs.alacritty.customize {
     font.size = 10;
     draw_bold_text_with_bright_colors = true;
 
+    cursor.style.blinking = "never";
+
     colors.primary.background = "#000000";
   };
 }
