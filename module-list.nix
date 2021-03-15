@@ -6,7 +6,6 @@
 
   # modules
   ./modules/user-environment.nix
-  ./modules/biboumi.nix
   ./modules/secrets.nix
 
   # system config
