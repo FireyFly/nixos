@@ -7,7 +7,7 @@ pkgs.alacritty.customize {
     window.padding = { x = 2; y = 2; };
     window.decorations = "none";
 
-    font.size = 10;
+    font.size = 9;
     draw_bold_text_with_bright_colors = true;
 
     cursor.style.blinking = "never";

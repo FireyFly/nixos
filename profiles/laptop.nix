@@ -83,7 +83,7 @@ in {
       enableDefaultFonts = true;
       enableFontDir = true;
       fonts = with pkgs; [
-        ttf-envy-code-r
+        iosevka
         noto-fonts
         noto-fonts-cjk
         noto-fonts-extra
@@ -93,7 +93,11 @@ in {
       ];
       fontconfig.enable = true;
       fontconfig.defaultFonts = {
-        monospace = [ "Envy Code R" "DejaVu Sans Mono" "Noto Color Emoji" ];
+        monospace = [
+          "Iosevka"
+          "DejaVu Sans Mono"
+          "Noto Color Emoji"
+        ];
       };
     };
   };
