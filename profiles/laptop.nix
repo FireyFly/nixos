@@ -48,8 +48,6 @@ in {
       openssl
       sshfs-fuse
       youtube-dl
-      # gui tools
-      mpv
       wireshark-cli
       # hardware
       acpitool usbutils pciutils
@@ -64,7 +62,6 @@ in {
       dino
     ] ++ when hasX11 [
       pangoterm
-      katarakt
       feh
       scrot
       xclip
@@ -73,9 +70,11 @@ in {
       wl-clipboard
       imv
       grim
-    ] ++ when (hasX11 or hasWayland) [
+    ] ++ when (hasX11 || hasWayland) [
+      mupdf
       firefox-wayland
       pass-wayland
+      mpv
     ];
 
     # fonts
