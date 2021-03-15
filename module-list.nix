@@ -1,6 +1,7 @@
 [
   # system profiles
   ./profiles/common.nix
+  ./profiles/gaming.nix
   ./profiles/laptop.nix
   ./profiles/sdr.nix
 
