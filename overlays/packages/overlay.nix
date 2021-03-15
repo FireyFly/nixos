@@ -10,6 +10,8 @@ rec {
 
   displaz = super.libsForQt5.callPackage ./displaz {};
 
+  cfunge = super.callPackage ./cfunge {};
+
   lywsd03mmc-exporter = super.callPackage ./lywsd03mmc-exporter {};
 
   pangoterm = super.callPackage ./pangoterm {};
