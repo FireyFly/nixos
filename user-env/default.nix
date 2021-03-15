@@ -23,6 +23,7 @@ pkgs.buildEnv {
     # network
    #bind
     finger_bsd lftp whois
+    dnsutils tcpdump
     mosh wget
     # compression
     unzip zip
@@ -32,6 +33,6 @@ pkgs.buildEnv {
     w3m jq ripgrep xmlformat
     j
     (import ./vim { inherit pkgs; })
-    git
+    git git-revise
   ];
 }
