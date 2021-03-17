@@ -1,3 +1,7 @@
-/configuration.nix
-/result
+# local data & symlinks, not to be committed
+/nixpkgs
 /secrets
+/configuration.nix
+
+# ignore all nix-build result symlinks
+result
